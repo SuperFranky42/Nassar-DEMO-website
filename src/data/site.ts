@@ -5,7 +5,7 @@ export const site = {
   phoneDisplay: "+1 918-990-3807",
   phoneHref: "tel:+19189903807",
   email: "hello@nassar.demo",
-  address: "418 Workshop Lane",
+  address: "6220 Kingston Rd, Oklahoma City, OK, United States, 73122",
   serviceArea: "the metro and nearby towns",
   hours: "Monday to Friday, 8:00–5:30",
 };
