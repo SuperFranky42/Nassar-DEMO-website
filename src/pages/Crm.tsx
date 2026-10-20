@@ -234,6 +234,7 @@ function CrmBoard({ onSignOut }: { onSignOut: () => void }) {
             <dl className="mt-8 space-y-4 text-sm">
               {[
                 ["Project", selected.projectType],
+                ["Area", selected.area || "Not recorded"],
                 ["Budget", selected.budget],
                 ["Timeline", selected.timeline],
                 ["Received", formatWhen(selected.createdAt)],

@@ -13,6 +13,8 @@ function cloneLeads(leads: Lead[]) {
   return leads.map((lead) => ({ ...lead }));
 }
 
+const notRecorded = "Not recorded";
+
 function isLead(value: unknown): value is Lead {
   if (!value || typeof value !== "object") return false;
   const lead = value as Partial<Lead>;
@@ -28,8 +30,14 @@ function isLead(value: unknown): value is Lead {
     typeof lead.status === "string" &&
     statusIds.has(lead.status) &&
     typeof lead.createdAt === "string" &&
-    (lead.source === "sample" || lead.source === "quote")
+    (lead.source === "sample" || lead.source === "quote") &&
+    (lead.area === undefined || typeof lead.area === "string")
   );
+}
+
+function withArea(lead: Lead): Lead {
+  const area = lead.area?.trim();
+  return area ? { ...lead, area } : { ...lead, area: notRecorded };
 }
 
 export function writeLeads(leads: Lead[]) {
@@ -50,7 +58,7 @@ export function loadLeads(): Lead[] {
       writeLeads(seeded);
       return seeded;
     }
-    const leads = parsed.filter(isLead);
+    const leads = parsed.filter(isLead).map(withArea);
     if (leads.length === 0) {
       const seeded = cloneLeads(seedLeads);
       writeLeads(seeded);

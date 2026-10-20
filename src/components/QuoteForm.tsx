@@ -1,5 +1,5 @@
 import { useState, type FormEvent, type ReactNode } from "react";
-import { budgetOptions, timelineOptions } from "../data/site.ts";
+import { budgetOptions, serviceAreas, timelineOptions } from "../data/site.ts";
 import { projectTypeOptions } from "../data/services.ts";
 import { addLead } from "../crm/storage.ts";
 import { btnPrimary, btnSecondary } from "../lib/styles.ts";
@@ -9,6 +9,7 @@ type FormState = {
   email: string;
   phone: string;
   projectType: string;
+  area: string;
   budget: string;
   timeline: string;
   message: string;
@@ -23,6 +24,7 @@ const emptyForm: FormState = {
   email: "",
   phone: "",
   projectType: "",
+  area: "",
   budget: "",
   timeline: "",
   message: "",
@@ -48,6 +50,7 @@ function validate(form: FormState) {
     errors.phone = "Add a phone number.";
   }
   if (!form.projectType) errors.projectType = "Choose a project type.";
+  if (!form.area) errors.area = "Choose an area.";
   if (!form.budget) errors.budget = "Choose a rough budget.";
   if (!form.timeline) errors.timeline = "Choose a timeline.";
   if (form.message.trim().length < 12) {
@@ -109,6 +112,7 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
       email: form.email.trim(),
       phone: form.phone.trim(),
       projectType: form.projectType,
+      area: form.area,
       budget: form.budget,
       timeline: form.timeline,
       message: form.message.trim(),
@@ -244,6 +248,25 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
                 {option}
               </option>
             ))}
+          </select>
+        </Field>
+        <Field id="area" label="Area" error={errors.area}>
+          <select
+            id="area"
+            name="area"
+            value={form.area}
+            onChange={(event) => update("area", event.target.value)}
+            className={fieldClass}
+            aria-invalid={Boolean(errors.area)}
+            aria-describedby={errors.area ? "area-error" : undefined}
+          >
+            <option value="">Choose an area</option>
+            {serviceAreas.map((area) => (
+              <option key={area.name} value={area.name}>
+                {area.name}
+              </option>
+            ))}
+            <option value="Somewhere else">Somewhere else</option>
           </select>
         </Field>
         <Field id="timeline" label="Timeline" error={errors.timeline}>

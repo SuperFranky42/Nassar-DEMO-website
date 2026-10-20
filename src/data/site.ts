@@ -1,5 +1,14 @@
 import { photo } from "./photos.ts";
 
+export const serviceAreas = [
+  { group: "Cities", name: "Broken Arrow, OK" },
+  { group: "Cities", name: "Shawnee, OK" },
+  { group: "Cities", name: "Tahlequah, OK" },
+  { group: "Counties", name: "Tulsa County, OK" },
+  { group: "Counties", name: "Muskogee County, OK" },
+  { group: "Counties", name: "Oklahoma County, OK" },
+] as const;
+
 export const site = {
   name: "Nassar",
   legalName: "Nassar Renovation",
@@ -8,7 +17,8 @@ export const site = {
   phoneHref: "tel:+19189903807",
   email: "hello@nassar.demo",
   address: "6220 Kingston Rd, Oklahoma City, OK, United States, 73122",
-  serviceArea: "the metro and nearby towns",
+  serviceArea:
+    "Broken Arrow, Shawnee, Tahlequah, and Tulsa, Muskogee, and Oklahoma counties",
   hours: "Monday to Friday, 8:00–5:30",
   license: "OK #44190",
   established: "2009",
@@ -28,7 +38,8 @@ export const trust = [
   },
   {
     title: "Close to the job",
-    text: "We work across the metro and nearby towns, and we come back if a detail needs another look.",
+    text: `We work in ${site.serviceArea}, and we come back if a detail needs another look.`,
+    link: { to: "/about#where-we-work", label: "Where we work" },
   },
   {
     title: "A quote you can hold",

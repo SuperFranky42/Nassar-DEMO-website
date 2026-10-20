@@ -63,6 +63,11 @@ export function Home() {
             <li key={item.title}>
               <p className="font-medium text-ink">{item.title}</p>
               <p className="mt-2 text-sm text-muted">{item.text}</p>
+              {item.link ? (
+                <Link to={item.link.to} className={`${textLink} mt-3 inline-block text-sm`}>
+                  {item.link.label}
+                </Link>
+              ) : null}
             </li>
           ))}
         </ul>

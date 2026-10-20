@@ -2,7 +2,7 @@ import { PageHero } from "../components/PageHero.tsx";
 import { QuoteBand } from "../components/QuoteBand.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
 import { photo } from "../data/photos.ts";
-import { roles, site } from "../data/site.ts";
+import { roles, serviceAreas, site } from "../data/site.ts";
 import { container } from "../lib/styles.ts";
 
 const promises = [
@@ -36,7 +36,7 @@ export function About() {
           <p className="mt-4 text-lg leading-relaxed text-muted">
             A job starts with a visit, a measurement, and a written scope. The same
             project lead stays from that conversation through the final walkthrough.
-            The crew is local to {site.serviceArea}, which is how we can come back
+            The crew works in {site.serviceArea}, which is how we can come back
             when a detail needs another look.
           </p>
           <p className="mt-4 leading-relaxed text-muted">
@@ -86,14 +86,31 @@ export function About() {
         </ul>
       </section>
 
-      <section className="border-t border-line bg-cream">
+      <section id="where-we-work" className="scroll-mt-24 border-t border-line bg-cream">
         <div className={`${container} grid gap-8 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center`}>
           <div>
             <h2 className="font-serif text-3xl text-ink">Where we work</h2>
             <p className="mt-4 text-muted">
               Visits are across {site.serviceArea}. Call, email, or send a quote
-              request and we will set a time at the house.
+              request and we will set a time at the house. If the house is farther
+              out, we will say so before we set a time.
             </p>
+            <ul className="mt-8 grid gap-8 sm:grid-cols-2">
+              {["Cities", "Counties"].map((group) => (
+                <li key={group}>
+                  <p className="font-medium text-ink">{group}</p>
+                  <ul className="mt-2 space-y-1">
+                    {serviceAreas
+                      .filter((area) => area.group === group)
+                      .map((area) => (
+                        <li key={area.name} className="text-sm text-muted">
+                          {area.name}
+                        </li>
+                      ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
             <dl className="mt-6 space-y-3 text-sm">
               <div>
                 <dt className="text-xs tracking-[0.14em] text-brass uppercase">Office</dt>

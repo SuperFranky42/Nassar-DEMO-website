@@ -14,6 +14,7 @@ export type Lead = {
   email: string;
   phone: string;
   projectType: string;
+  area: string;
   budget: string;
   timeline: string;
   message: string;
@@ -31,6 +32,7 @@ export const seedLeads: Lead[] = [
     email: "paula.trent@example.com",
     phone: "(555) 010-2284",
     projectType: "Bathroom renovation",
+    area: "Broken Arrow, OK",
     budget: "$15,000–$40,000",
     timeline: "As soon as you can start",
     message:
@@ -45,6 +47,7 @@ export const seedLeads: Lead[] = [
     email: "ben.carter@example.com",
     phone: "(555) 017-6630",
     projectType: "Bathroom renovation",
+    area: "Shawnee, OK",
     budget: "Under $15,000",
     timeline: "In 1–3 months",
     message:
@@ -59,6 +62,7 @@ export const seedLeads: Lead[] = [
     email: "amira.solano@example.com",
     phone: "(555) 013-4418",
     projectType: "Kitchen remodeling",
+    area: "Tahlequah, OK",
     budget: "$40,000–$80,000",
     timeline: "In 1–3 months",
     message:
@@ -73,6 +77,7 @@ export const seedLeads: Lead[] = [
     email: "samir.haddad@example.com",
     phone: "(555) 016-9021",
     projectType: "Flooring and finishes",
+    area: "Tulsa County, OK",
     budget: "$15,000–$40,000",
     timeline: "In 3–6 months",
     message:
@@ -87,6 +92,7 @@ export const seedLeads: Lead[] = [
     email: "hello@ibarra.example",
     phone: "(555) 019-7742",
     projectType: "Whole-home renovation",
+    area: "Muskogee County, OK",
     budget: "$80,000 and up",
     timeline: "In 3–6 months",
     message:
@@ -101,6 +107,7 @@ export const seedLeads: Lead[] = [
     email: "nora.feldman@example.com",
     phone: "(555) 012-3388",
     projectType: "Painting",
+    area: "Oklahoma County, OK",
     budget: "Under $15,000",
     timeline: "In 1–3 months",
     message:
@@ -115,6 +122,7 @@ export const seedLeads: Lead[] = [
     email: "elise.nguyen@example.com",
     phone: "(555) 015-2209",
     projectType: "Additions",
+    area: "Broken Arrow, OK",
     budget: "$80,000 and up",
     timeline: "Just exploring",
     message:
@@ -129,6 +137,7 @@ export const seedLeads: Lead[] = [
     email: "greg.walsh@example.com",
     phone: "(555) 018-4410",
     projectType: "Kitchen remodeling",
+    area: "Shawnee, OK",
     budget: "$40,000–$80,000",
     timeline: "As soon as you can start",
     message:

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { nav, site } from "../data/site.ts";
+import { nav, serviceAreas, site } from "../data/site.ts";
 import { container } from "../lib/styles.ts";
 
 export function Footer() {
@@ -19,9 +19,12 @@ export function Footer() {
           <p className="mt-1 text-sm text-paper/70">
             Licensed {site.license} · Since {site.established}
           </p>
-          <p className="mt-1 text-sm text-paper/70">
-            Serving homeowners across {site.serviceArea}.
-          </p>
+          <Link
+            to="/about#where-we-work"
+            className="mt-1 block text-sm text-paper/70 hover:text-cream"
+          >
+            {serviceAreas.map((area) => area.name).join(" · ")}
+          </Link>
           <p className="mt-3 text-sm text-paper/70">{site.hours}</p>
         </div>
         <div>
