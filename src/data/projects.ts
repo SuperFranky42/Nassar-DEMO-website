@@ -1,5 +1,6 @@
 import type { CategoryId } from "./categories.ts";
 import { photo } from "./photos.ts";
+import lindenAfter from "../../assets/home_page_banner.jpg";
 
 export type Project = {
   slug: string;
@@ -89,9 +90,9 @@ export const projects: Project[] = [
       "New lighting and paint in one palette",
     ],
     featured: true,
-    cover: photo("1600210492486-724fe5c67fb0"),
+    cover: lindenAfter,
     before: photo("1560185007-cde436f6a4d0"),
-    after: photo("1600607687939-ce8a6c25118c"),
+    after: lindenAfter,
     gallery: [
       photo("1618221195710-dd6b41faaea6"),
       photo("1586023492125-27b2c045efd7"),
