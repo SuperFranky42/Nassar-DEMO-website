@@ -129,11 +129,15 @@ export function About() {
               </div>
             </dl>
           </div>
-          <img
-            src={photo("1600596542815-ffad4c1539a9")}
-            alt="A finished house exterior"
-            className="aspect-[4/3] w-full rounded-3xl object-cover"
-          />
+          <div className="aspect-[4/3] overflow-hidden rounded-3xl">
+            <iframe
+              title={`Map of the ${site.legalName} office`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(site.address)}&z=15&output=embed`}
+              className="h-full w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
         </div>
       </section>
       <QuoteBand
