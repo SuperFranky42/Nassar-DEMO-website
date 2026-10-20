@@ -42,11 +42,16 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-3">
           <div className="hidden items-center gap-2 lg:flex">
-            <img
-              src={lead.image}
-              alt={`${lead.name}, ${lead.title}`}
-              className="h-9 w-9 rounded-full object-cover"
-            />
+            <Link
+              to="/about#who-you-will-meet"
+              className="shrink-0 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
+            >
+              <img
+                src={lead.image}
+                alt={`${lead.name}, ${lead.title}`}
+                className="h-9 w-9 rounded-full object-cover"
+              />
+            </Link>
             <span className="leading-tight">
               <a href={site.phoneHref} className="block text-sm text-muted hover:text-ink">
                 {site.phoneDisplay}

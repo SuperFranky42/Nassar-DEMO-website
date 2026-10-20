@@ -52,7 +52,7 @@ export function About() {
         />
       </section>
 
-      <section className="bg-paper py-14">
+      <section id="who-you-will-meet" className="scroll-mt-24 bg-paper py-14">
         <div className={container}>
           <h2 className="font-serif text-3xl text-ink">Who you will meet</h2>
           <ul className="mt-8 grid gap-6 lg:grid-cols-3">
