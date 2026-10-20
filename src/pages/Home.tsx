@@ -18,8 +18,8 @@ export function Home() {
 
   return (
     <>
-      <section className={`${container} grid items-end gap-10 py-14 lg:grid-cols-2 lg:gap-16 lg:py-20`}>
-        <div>
+      <section className={`${container} grid items-center gap-10 py-14 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-16 lg:py-20`}>
+        <div className="order-2 lg:order-1">
           <p className="text-xs font-medium tracking-[0.18em] text-brass uppercase">
             {site.legalName}
           </p>
@@ -41,11 +41,11 @@ export function Home() {
           </div>
         </div>
         {hero ? (
-          <Link to={`/work/${hero.slug}`} className="group block">
+          <Link to={`/work/${hero.slug}`} className="group order-1 block lg:order-2">
             <img
               src={hero.cover}
               alt={`${hero.title} after renovation`}
-              className="aspect-[5/4] w-full rounded-3xl object-cover"
+              className="aspect-[4/3] w-full rounded-3xl object-cover sm:aspect-[5/4] lg:aspect-[4/5] lg:min-h-[34rem]"
             />
             <span className="mt-3 flex items-center justify-between text-sm text-muted">
               <span>
@@ -84,13 +84,20 @@ export function Home() {
             <li key={service.slug} className="bg-canvas">
               <Link
                 to={`/services#${service.slug}`}
-                className="flex h-full flex-col p-6 transition hover:bg-paper"
+                className="flex h-full flex-col transition hover:bg-paper"
               >
-                <span className="text-xs tracking-[0.16em] text-brass">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-3 font-serif text-2xl text-ink">{service.name}</h3>
-                <p className="mt-2 line-clamp-3 text-sm text-muted">{service.summary}</p>
+                <img
+                  src={service.image}
+                  alt=""
+                  className="aspect-[3/2] w-full object-cover"
+                />
+                <div className="flex flex-1 flex-col p-6">
+                  <span className="text-xs tracking-[0.16em] text-brass">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-3 font-serif text-2xl text-ink">{service.name}</h3>
+                  <p className="mt-2 line-clamp-3 text-sm text-muted">{service.summary}</p>
+                </div>
               </Link>
             </li>
           ))}

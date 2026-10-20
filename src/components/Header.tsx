@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { nav, site } from "../data/site.ts";
+import { nav, roles, site } from "../data/site.ts";
 import { btnPrimary, container } from "../lib/styles.ts";
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
@@ -15,6 +15,8 @@ export function Header() {
     setOpenPath(location.pathname);
     setOpen(false);
   }
+
+  const lead = roles.find((role) => role.title === "Project lead") ?? roles[0];
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md">
@@ -39,12 +41,21 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <a
-            href={site.phoneHref}
-            className="hidden text-sm text-muted hover:text-ink lg:inline"
-          >
-            {site.phoneDisplay}
-          </a>
+          <div className="hidden items-center gap-2 lg:flex">
+            <img
+              src={lead.image}
+              alt={`${lead.name}, ${lead.title}`}
+              className="h-9 w-9 rounded-full object-cover"
+            />
+            <span className="leading-tight">
+              <a href={site.phoneHref} className="block text-sm text-muted hover:text-ink">
+                {site.phoneDisplay}
+              </a>
+              <span className="block text-[11px] tracking-wide text-muted">
+                Lic. {site.license}
+              </span>
+            </span>
+          </div>
           <Link to="/quote" className={btnPrimary}>
             <span className="sm:hidden">Quote</span>
             <span className="hidden sm:inline">Get a quote</span>
@@ -81,6 +92,7 @@ export function Header() {
           <a href={site.phoneHref} className="py-3 text-base">
             Call {site.phoneDisplay}
           </a>
+          <p className="pb-3 text-sm text-muted">Licensed {site.license}</p>
         </nav>
       ) : null}
     </header>

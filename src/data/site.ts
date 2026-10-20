@@ -1,3 +1,5 @@
+import { photo } from "./photos.ts";
+
 export const site = {
   name: "Nassar",
   legalName: "Nassar Renovation",
@@ -8,6 +10,8 @@ export const site = {
   address: "6220 Kingston Rd, Oklahoma City, OK, United States, 73122",
   serviceArea: "the metro and nearby towns",
   hours: "Monday to Friday, 8:00–5:30",
+  license: "OK #44190",
+  established: "2009",
 };
 
 export const nav = [
@@ -20,7 +24,7 @@ export const nav = [
 export const trust = [
   {
     title: "Licensed and insured",
-    text: "Coverage is settled before the first visit, and we say so up front.",
+    text: `License ${site.license}. Coverage is settled before the first visit, and we say so up front.`,
   },
   {
     title: "Close to the job",
@@ -57,16 +61,22 @@ export const steps = [
 
 export const roles = [
   {
+    name: "Chris Ellison",
     title: "Project lead",
     text: "Your contact from the first visit through the final walkthrough. One person owns the schedule and the answers.",
+    image: photo("1472099645785-5658abf4ff4e", 900),
   },
   {
+    name: "Marcus Hale",
     title: "Lead carpenter",
     text: "Runs the site day to day, protects the rooms you are still using, and keeps the work in the order we promised.",
+    image: photo("1522529599102-193c0d76b5b6", 900),
   },
   {
+    name: "Elena Ruiz",
     title: "Finish crew",
     text: "Cabinets, tile, paint, and floors. The people who make the last stretch look like it was planned.",
+    image: photo("1580489944761-15a19d654956", 900),
   },
 ];
 

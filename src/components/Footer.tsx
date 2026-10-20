@@ -17,6 +17,9 @@ export function Footer() {
           <p className="text-xs tracking-[0.16em] text-paper/50 uppercase">Visit</p>
           <p className="mt-3 text-sm">{site.address}</p>
           <p className="mt-1 text-sm text-paper/70">
+            Licensed {site.license} · Since {site.established}
+          </p>
+          <p className="mt-1 text-sm text-paper/70">
             Serving homeowners across {site.serviceArea}.
           </p>
           <p className="mt-3 text-sm text-paper/70">{site.hours}</p>

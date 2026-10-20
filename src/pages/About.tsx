@@ -57,9 +57,17 @@ export function About() {
           <h2 className="font-serif text-3xl text-ink">Who you will meet</h2>
           <ul className="mt-8 grid gap-6 lg:grid-cols-3">
             {roles.map((role) => (
-              <li key={role.title} className="rounded-2xl border border-line bg-canvas p-6">
-                <h3 className="font-serif text-2xl">{role.title}</h3>
-                <p className="mt-3 text-sm text-muted">{role.text}</p>
+              <li key={role.title} className="overflow-hidden rounded-2xl border border-line bg-canvas">
+                <img
+                  src={role.image}
+                  alt=""
+                  className="aspect-[4/5] w-full object-cover object-[center_20%]"
+                />
+                <div className="p-6">
+                  <p className="text-sm font-medium text-ink">{role.name}</p>
+                  <h3 className="mt-1 font-serif text-2xl">{role.title}</h3>
+                  <p className="mt-3 text-sm text-muted">{role.text}</p>
+                </div>
               </li>
             ))}
           </ul>
@@ -88,7 +96,7 @@ export function About() {
             </p>
             <dl className="mt-6 space-y-3 text-sm">
               <div>
-                <dt className="text-xs tracking-[0.14em] text-brass uppercase">Studio</dt>
+                <dt className="text-xs tracking-[0.14em] text-brass uppercase">Office</dt>
                 <dd className="mt-1">{site.address}</dd>
               </div>
               <div>
@@ -102,6 +110,14 @@ export function About() {
                     {site.phoneDisplay}
                   </a>
                 </dd>
+              </div>
+              <div>
+                <dt className="text-xs tracking-[0.14em] text-brass uppercase">License</dt>
+                <dd className="mt-1">{site.license}</dd>
+              </div>
+              <div>
+                <dt className="text-xs tracking-[0.14em] text-brass uppercase">Since</dt>
+                <dd className="mt-1">{site.established}</dd>
               </div>
               <div>
                 <dt className="text-xs tracking-[0.14em] text-brass uppercase">Email</dt>
