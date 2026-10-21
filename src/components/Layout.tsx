@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { CallNowButton } from "./CallNowButton.tsx";
 import { Footer } from "./Footer.tsx";
 import { Header } from "./Header.tsx";
 
@@ -7,7 +8,7 @@ export function Layout() {
     <div className="flex min-h-screen flex-col">
       <a
         href="#main"
-        className="absolute top-0 left-4 z-50 -translate-y-full rounded-full bg-paper px-3 py-2 text-sm focus:translate-y-4"
+        className="absolute top-0 left-4 z-50 -translate-y-full rounded-md bg-brass px-3 py-2 text-sm font-bold text-ink focus:translate-y-4"
       >
         Skip to content
       </a>
@@ -16,6 +17,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <CallNowButton />
     </div>
   );
 }

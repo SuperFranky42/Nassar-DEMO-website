@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../../assets/logo-lockup.png";
-import { nav, roles, site } from "../data/site.ts";
+import { nav, site } from "../data/site.ts";
 import { btnPrimary, container } from "../lib/styles.ts";
+import { Icon } from "./Icon.tsx";
+import { TrustTicker } from "./TrustTicker.tsx";
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
-  `text-sm transition ${isActive ? "text-ink" : "text-muted hover:text-ink"}`;
+  `text-sm font-semibold transition ${isActive ? "text-brass-deep" : "text-ink hover:text-brass-deep"}`;
 
 export function Header() {
   const location = useLocation();
@@ -17,11 +19,8 @@ export function Header() {
     setOpen(false);
   }
 
-  const lead = roles.find((role) => role.title === "Project lead") ?? roles[0];
-
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md">
-      <div className="h-1 bg-brass" />
+    <header className="sticky top-0 z-40 bg-canvas shadow-sm">
       <div className={`${container} flex items-center justify-between gap-4 py-2`}>
         <Link
           to="/"
@@ -40,7 +39,10 @@ export function Header() {
             className="h-12 w-auto brightness-0 sm:h-14 lg:h-16"
           />
         </Link>
-        <nav className="hidden items-center gap-6 md:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
+          <NavLink to="/" end className={navClass}>
+            Home
+          </NavLink>
           {nav.map((item) => (
             <NavLink key={item.to} to={item.to} className={navClass}>
               {item.label}
@@ -48,33 +50,20 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <div className="hidden items-center gap-2 lg:flex">
-            <Link
-              to="/about#who-you-will-meet"
-              className="shrink-0 rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brass"
-            >
-              <img
-                src={lead.image}
-                alt={lead.title}
-                className="h-9 w-9 rounded-full object-cover"
-              />
-            </Link>
-            <span className="leading-tight">
-              <a href={site.phoneHref} className="block text-sm text-muted hover:text-ink">
-                {site.phoneDisplay}
-              </a>
-              <span className="block text-[11px] tracking-wide text-muted">
-                Lic. {site.license}
-              </span>
-            </span>
-          </div>
+          <a
+            href={site.phoneHref}
+            className="hidden items-center gap-2 rounded-md border border-line px-3 py-2 text-sm font-semibold text-ink transition hover:border-ink/40 lg:inline-flex"
+          >
+            <Icon name="phone" className="h-4 w-4" />
+            {site.phoneDisplay}
+          </a>
           <Link to="/quote" className={btnPrimary}>
             <span className="sm:hidden">Quote</span>
-            <span className="hidden sm:inline">Get a quote</span>
+            <span className="hidden sm:inline">Request Quote</span>
           </Link>
           <button
             type="button"
-            className="text-sm font-medium md:hidden"
+            className="rounded-md border border-line px-3 py-2 text-sm font-semibold md:hidden"
             aria-expanded={open}
             aria-controls="site-menu"
             onClick={() => {
@@ -92,21 +81,25 @@ export function Header() {
           className={`${container} flex flex-col border-t border-line py-3 md:hidden`}
           aria-label="Mobile"
         >
+          <NavLink to="/" end className="border-b border-line py-3 text-base font-semibold">
+            Home
+          </NavLink>
           {nav.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
-              className="border-b border-line py-3 text-base"
+              className="border-b border-line py-3 text-base font-semibold"
             >
               {item.label}
             </NavLink>
           ))}
-          <a href={site.phoneHref} className="py-3 text-base">
+          <a href={site.phoneHref} className="py-3 text-base font-semibold">
             Call {site.phoneDisplay}
           </a>
           <p className="pb-3 text-sm text-muted">Licensed {site.license}</p>
         </nav>
       ) : null}
+      <TrustTicker />
     </header>
   );
 }

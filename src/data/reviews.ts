@@ -85,3 +85,7 @@ export const reviews: Review[] = [
       "The new room feels like it was always part of the house. Guests look for the seam and cannot find it, which was the whole point.",
   },
 ];
+
+export function reviewAverage() {
+  return reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
+}

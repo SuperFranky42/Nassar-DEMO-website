@@ -1,5 +1,7 @@
+import { Icon } from "../components/Icon.tsx";
 import { PageHero } from "../components/PageHero.tsx";
 import { QuoteBand } from "../components/QuoteBand.tsx";
+import { SectionHeading } from "../components/SectionHeading.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
 import { roles, serviceAreas, site } from "../data/site.ts";
 import { container } from "../lib/styles.ts";
@@ -19,29 +21,38 @@ const promises = [
   },
 ];
 
+const details = [
+  { label: "Office", value: site.address },
+  { label: "Hours", value: site.hours },
+  { label: "License", value: site.license },
+  { label: "Since", value: site.established },
+];
+
 export function About() {
   usePageTitle("About · Nassar Renovation");
 
   return (
     <>
       <PageHero
+        eyebrow="About Nassar"
         wideTitle
-        title="An experienced team that focuses on quality, reliability, and customer satisfaction from start to finish."
+        title="An experienced team focused on quality, reliability, and"
+        accent="customer satisfaction."
       />
 
-      <section id="who-you-will-meet" className="scroll-mt-24 bg-paper py-14">
+      <section id="who-you-will-meet" className="scroll-mt-32 bg-canvas py-20">
         <div className={container}>
-          <h2 className="font-serif text-3xl text-ink">Who you will meet</h2>
-          <ul className="mt-8 grid gap-6 lg:grid-cols-3">
+          <SectionHeading title="Who you will" accent="meet" />
+          <ul className="mt-10 grid gap-6 lg:grid-cols-3">
             {roles.map((role) => (
-              <li key={role.title} className="overflow-hidden rounded-2xl border border-line bg-canvas">
+              <li key={role.title} className="overflow-hidden rounded-2xl border border-line bg-white">
                 <img
                   src={role.image}
                   alt=""
                   className="aspect-[4/5] w-full object-cover object-[center_20%]"
                 />
                 <div className="p-6">
-                  <h3 className="font-serif text-2xl">{role.title}</h3>
+                  <h3 className="text-xl font-extrabold">{role.title}</h3>
                   <p className="mt-3 text-sm text-muted">{role.text}</p>
                 </div>
               </li>
@@ -50,36 +61,39 @@ export function About() {
         </div>
       </section>
 
-      <section className={`${container} py-14`}>
-        <h2 className="font-serif text-3xl text-ink">Working around a lived-in house</h2>
-        <ul className="mt-8 grid gap-6 md:grid-cols-3">
-          {promises.map((promise) => (
-            <li key={promise.title}>
-              <h3 className="font-serif text-2xl text-ink">{promise.title}</h3>
-              <p className="mt-3 text-sm text-muted">{promise.text}</p>
-            </li>
-          ))}
-        </ul>
+      <section className="pattern-dots py-20 text-white">
+        <div className={container}>
+          <SectionHeading dark title="Working around a" accent="lived-in house" />
+          <ul className="mt-10 grid gap-6 md:grid-cols-3">
+            {promises.map((promise) => (
+              <li key={promise.title} className="rounded-2xl border border-white/10 bg-white/5 p-6">
+                <Icon name="shield" className="h-7 w-7 text-brass" />
+                <h3 className="mt-4 text-xl font-extrabold">{promise.title}</h3>
+                <p className="mt-3 text-sm text-white/70">{promise.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
-      <section id="where-we-work" className="scroll-mt-24 border-t border-line bg-cream">
-        <div className={`${container} grid gap-8 py-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-center`}>
+      <section id="where-we-work" className="scroll-mt-32 bg-paper py-20">
+        <div className={`${container} grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center`}>
           <div>
-            <h2 className="font-serif text-3xl text-ink">Where we work</h2>
-            <p className="mt-4 text-muted">
-              Visits are across {site.serviceArea}. Call, email, or send a quote
-              request and we will set a time at the house. If the house is farther
-              out, we will say so before we set a time.
-            </p>
+            <SectionHeading
+              title="Where we"
+              accent="work"
+              text={`Visits are across ${site.serviceArea}. If the house is farther out, we will say so before we set a time.`}
+            />
             <ul className="mt-8 grid gap-8 sm:grid-cols-2">
               {["Cities", "Counties"].map((group) => (
                 <li key={group}>
-                  <p className="font-medium text-ink">{group}</p>
-                  <ul className="mt-2 space-y-1">
+                  <p className="text-xs font-bold tracking-[0.14em] text-brass-deep uppercase">{group}</p>
+                  <ul className="mt-3 space-y-2">
                     {serviceAreas
                       .filter((area) => area.group === group)
                       .map((area) => (
-                        <li key={area.name} className="text-sm text-muted">
+                        <li key={area.name} className="flex items-center gap-2 font-semibold">
+                          <Icon name="pin" className="h-4 w-4 text-brass-deep" />
                           {area.name}
                         </li>
                       ))}
@@ -87,42 +101,34 @@ export function About() {
                 </li>
               ))}
             </ul>
-            <dl className="mt-6 space-y-3 text-sm">
+            <dl className="mt-8 grid gap-4 border-t border-line pt-6 text-sm sm:grid-cols-2">
+              {details.map((detail) => (
+                <div key={detail.label}>
+                  <dt className="text-xs font-bold tracking-[0.14em] text-brass-deep uppercase">
+                    {detail.label}
+                  </dt>
+                  <dd className="mt-1">{detail.value}</dd>
+                </div>
+              ))}
               <div>
-                <dt className="text-xs tracking-[0.14em] text-brass uppercase">Office</dt>
-                <dd className="mt-1">{site.address}</dd>
-              </div>
-              <div>
-                <dt className="text-xs tracking-[0.14em] text-brass uppercase">Hours</dt>
-                <dd className="mt-1">{site.hours}</dd>
-              </div>
-              <div>
-                <dt className="text-xs tracking-[0.14em] text-brass uppercase">Phone</dt>
+                <dt className="text-xs font-bold tracking-[0.14em] text-brass-deep uppercase">Phone</dt>
                 <dd className="mt-1">
-                  <a href={site.phoneHref} className="underline underline-offset-4">
+                  <a href={site.phoneHref} className="font-semibold underline underline-offset-4">
                     {site.phoneDisplay}
                   </a>
                 </dd>
               </div>
               <div>
-                <dt className="text-xs tracking-[0.14em] text-brass uppercase">License</dt>
-                <dd className="mt-1">{site.license}</dd>
-              </div>
-              <div>
-                <dt className="text-xs tracking-[0.14em] text-brass uppercase">Since</dt>
-                <dd className="mt-1">{site.established}</dd>
-              </div>
-              <div>
-                <dt className="text-xs tracking-[0.14em] text-brass uppercase">Email</dt>
-                <dd className="mt-1">
-                  <a href={`mailto:${site.email}`} className="underline underline-offset-4">
+                <dt className="text-xs font-bold tracking-[0.14em] text-brass-deep uppercase">Email</dt>
+                <dd className="mt-1 break-all">
+                  <a href={`mailto:${site.email}`} className="font-semibold underline underline-offset-4">
                     {site.email}
                   </a>
                 </dd>
               </div>
             </dl>
           </div>
-          <div className="aspect-[4/3] overflow-hidden rounded-3xl">
+          <div className="aspect-[4/3] overflow-hidden rounded-2xl border-4 border-white shadow-xl shadow-black/10">
             <iframe
               title={`Map of the ${site.legalName} office`}
               src={`https://maps.google.com/maps?q=${encodeURIComponent(site.address)}&z=15&output=embed`}

@@ -16,6 +16,7 @@ type FormState = {
 
 type QuoteFormProps = {
   initialProjectType?: string;
+  compact?: boolean;
 };
 
 const emptyForm: FormState = {
@@ -30,7 +31,7 @@ const emptyForm: FormState = {
 };
 
 const fieldClass =
-  "mt-2 w-full rounded-xl border border-line bg-paper px-3 py-2.5 text-ink outline-none ring-brass focus:ring-2";
+  "mt-2 w-full rounded-md border border-line bg-white px-3 py-2.5 text-ink outline-none ring-brass focus:border-brass focus:ring-2";
 
 function startingType(initialProjectType?: string) {
   if (initialProjectType && projectTypeOptions.includes(initialProjectType)) {
@@ -39,7 +40,7 @@ function startingType(initialProjectType?: string) {
   return "";
 }
 
-function validate(form: FormState) {
+function validate(form: FormState, compact: boolean) {
   const errors: Partial<Record<keyof FormState, string>> = {};
   if (form.name.trim().length < 2) errors.name = "Add your name.";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
@@ -50,8 +51,8 @@ function validate(form: FormState) {
   }
   if (!form.projectType) errors.projectType = "Choose a project type.";
   if (!form.area) errors.area = "Choose an area.";
-  if (!form.budget) errors.budget = "Choose a rough budget.";
-  if (!form.timeline) errors.timeline = "Choose a timeline.";
+  if (!compact && !form.budget) errors.budget = "Choose a rough budget.";
+  if (!compact && !form.timeline) errors.timeline = "Choose a timeline.";
   if (form.message.trim().length < 12) {
     errors.message = "Add a sentence about the project.";
   }
@@ -76,7 +77,7 @@ function Field({
       </label>
       {children}
       {error ? (
-        <p id={`${id}-error`} className="mt-1 text-sm text-brass-deep" role="alert">
+        <p id={`${id}-error`} className="mt-1 text-sm text-red-700" role="alert">
           {error}
         </p>
       ) : null}
@@ -84,7 +85,7 @@ function Field({
   );
 }
 
-export function QuoteForm({ initialProjectType }: QuoteFormProps) {
+export function QuoteForm({ initialProjectType, compact = false }: QuoteFormProps) {
   const [form, setForm] = useState<FormState>({
     ...emptyForm,
     projectType: startingType(initialProjectType),
@@ -100,7 +101,7 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const nextErrors = validate(form);
+    const nextErrors = validate(form, compact);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
@@ -110,9 +111,9 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
   if (receipt) {
     const firstName = receipt.name.split(" ")[0];
     return (
-      <div role="status" className="rounded-3xl border border-line bg-paper p-8 sm:p-10">
-        <p className="text-xs tracking-[0.16em] text-brass uppercase">Request received</p>
-        <h2 className="mt-3 font-serif text-4xl text-ink">
+      <div role="status" className="rounded-2xl bg-white p-8 text-ink shadow-xl shadow-black/10 sm:p-10">
+        <p className="text-xs font-bold tracking-[0.16em] text-brass-deep uppercase">Request received</p>
+        <h2 className="mt-3 text-3xl font-extrabold text-ink">
           Thank you, {firstName}. We will be in touch.
         </h2>
         <p className="mt-4 text-muted">
@@ -139,9 +140,11 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
     <form
       onSubmit={onSubmit}
       noValidate
-      className="rounded-3xl border border-line bg-paper p-6 sm:p-8"
+      className="rounded-2xl border border-line bg-white p-6 text-ink shadow-xl shadow-black/10 sm:p-8"
     >
-      <h2 className="font-serif text-3xl text-ink">Project details</h2>
+      <h2 className="text-2xl font-extrabold text-ink">
+        {compact ? "Request a free quote" : "Project details"}
+      </h2>
       <p className="mt-2 text-sm text-muted">All fields are required.</p>
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <Field id="name" label="Name" error={errors.name}>
@@ -203,67 +206,73 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
             ))}
           </select>
         </Field>
-        <Field id="budget" label="Rough budget" error={errors.budget}>
-          <select
-            id="budget"
-            name="budget"
-            value={form.budget}
-            onChange={(event) => update("budget", event.target.value)}
-            className={fieldClass}
-            aria-invalid={Boolean(errors.budget)}
-            aria-describedby={errors.budget ? "budget-error" : undefined}
-          >
-            <option value="">Choose a range</option>
-            {budgetOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </Field>
-        <Field id="area" label="Area" error={errors.area}>
-          <select
-            id="area"
-            name="area"
-            value={form.area}
-            onChange={(event) => update("area", event.target.value)}
-            className={fieldClass}
-            aria-invalid={Boolean(errors.area)}
-            aria-describedby={errors.area ? "area-error" : undefined}
-          >
-            <option value="">Choose an area</option>
-            {serviceAreas.map((area) => (
-              <option key={area.name} value={area.name}>
-                {area.name}
-              </option>
-            ))}
-            <option value="Somewhere else">Somewhere else</option>
-          </select>
-        </Field>
-        <Field id="timeline" label="Timeline" error={errors.timeline}>
-          <select
-            id="timeline"
-            name="timeline"
-            value={form.timeline}
-            onChange={(event) => update("timeline", event.target.value)}
-            className={fieldClass}
-            aria-invalid={Boolean(errors.timeline)}
-            aria-describedby={errors.timeline ? "timeline-error" : undefined}
-          >
-            <option value="">Choose a timeline</option>
-            {timelineOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </Field>
+        {compact ? null : (
+          <Field id="budget" label="Rough budget" error={errors.budget}>
+            <select
+              id="budget"
+              name="budget"
+              value={form.budget}
+              onChange={(event) => update("budget", event.target.value)}
+              className={fieldClass}
+              aria-invalid={Boolean(errors.budget)}
+              aria-describedby={errors.budget ? "budget-error" : undefined}
+            >
+              <option value="">Choose a range</option>
+              {budgetOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </Field>
+        )}
+        <div className={compact ? "sm:col-span-2" : ""}>
+          <Field id="area" label="Area" error={errors.area}>
+            <select
+              id="area"
+              name="area"
+              value={form.area}
+              onChange={(event) => update("area", event.target.value)}
+              className={fieldClass}
+              aria-invalid={Boolean(errors.area)}
+              aria-describedby={errors.area ? "area-error" : undefined}
+            >
+              <option value="">Choose an area</option>
+              {serviceAreas.map((area) => (
+                <option key={area.name} value={area.name}>
+                  {area.name}
+                </option>
+              ))}
+              <option value="Somewhere else">Somewhere else</option>
+            </select>
+          </Field>
+        </div>
+        {compact ? null : (
+          <Field id="timeline" label="Timeline" error={errors.timeline}>
+            <select
+              id="timeline"
+              name="timeline"
+              value={form.timeline}
+              onChange={(event) => update("timeline", event.target.value)}
+              className={fieldClass}
+              aria-invalid={Boolean(errors.timeline)}
+              aria-describedby={errors.timeline ? "timeline-error" : undefined}
+            >
+              <option value="">Choose a timeline</option>
+              {timelineOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </Field>
+        )}
         <div className="sm:col-span-2">
           <Field id="message" label="About the project" error={errors.message}>
             <textarea
               id="message"
               name="message"
-              rows={5}
+              rows={compact ? 3 : 5}
               value={form.message}
               onChange={(event) => update("message", event.target.value)}
               className={fieldClass}
@@ -275,8 +284,8 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
         </div>
       </div>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <button type="submit" className={btnPrimary}>
-          Send the request
+        <button type="submit" className={`${btnPrimary} py-3 text-base sm:min-w-56`}>
+          {compact ? "Request Free Quote" : "Send the request"}
         </button>
         <p className="text-sm text-muted">Demo only: no email is sent.</p>
       </div>

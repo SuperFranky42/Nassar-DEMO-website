@@ -1,16 +1,21 @@
 import { Link } from "react-router-dom";
 import { usePageTitle } from "../components/usePageTitle.ts";
-import { container, textLink } from "../lib/styles.ts";
+import { btnPrimaryLarge, container } from "../lib/styles.ts";
 
 export function NotFound() {
   usePageTitle("Page not found · Nassar Renovation");
 
   return (
-    <div className={`${container} py-24`}>
-      <h1 className="font-serif text-4xl text-ink">That page is not in this demo.</h1>
-      <Link to="/" className={`${textLink} mt-6 inline-block`}>
-        Back home
-      </Link>
+    <div className="pattern-dots text-white">
+      <div className={`${container} py-28`}>
+        <p className="text-sm font-bold tracking-[0.16em] text-brass uppercase">404</p>
+        <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
+          That page is not in <span className="text-brass">this demo.</span>
+        </h1>
+        <Link to="/" className={`${btnPrimaryLarge} mt-8`}>
+          Back home
+        </Link>
+      </div>
     </div>
   );
 }

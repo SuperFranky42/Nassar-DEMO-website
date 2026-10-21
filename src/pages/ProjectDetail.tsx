@@ -1,7 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { BeforeAfter } from "../components/BeforeAfter.tsx";
+import { Icon } from "../components/Icon.tsx";
 import { ProjectCard } from "../components/ProjectCard.tsx";
 import { QuoteBand } from "../components/QuoteBand.tsx";
+import { SectionHeading } from "../components/SectionHeading.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
 import { categoryLabel } from "../data/categories.ts";
 import { getProject, relatedProjects } from "../data/projects.ts";
@@ -18,7 +20,7 @@ export function ProjectDetail() {
   if (!project) {
     return (
       <div className={`${container} py-24`}>
-        <h1 className="font-serif text-4xl text-ink">That project is not in this demo.</h1>
+        <h1 className="text-4xl font-extrabold text-ink">That project is not in this demo.</h1>
         <Link to="/work" className={`${textLink} mt-6 inline-block`}>
           Back to our work
         </Link>
@@ -38,44 +40,47 @@ export function ProjectDetail() {
 
   return (
     <article>
-      <div className={`${container} pt-10`}>
-        <p className="text-sm text-muted">
-          <Link to="/work" className={textLink}>
-            Our work
-          </Link>
-          <span className="px-2">/</span>
-          {label}
-        </p>
-        <h1 className="mt-4 max-w-3xl font-serif text-4xl text-balance text-ink sm:text-6xl">
-          {project.title}
-        </h1>
-        <p className="mt-4 max-w-2xl text-lg text-muted">{project.summary}</p>
-        <dl className="mt-8 grid grid-cols-2 gap-4 border-y border-line py-5 sm:grid-cols-4">
-          {facts.map((fact) => (
-            <div key={fact.label}>
-              <dt className="text-xs tracking-[0.14em] text-brass uppercase">{fact.label}</dt>
-              <dd className="mt-1 font-medium">{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-
-      <img
-        src={project.cover}
-        alt={`${project.title} after renovation`}
-        className="mt-8 aspect-[4/3] w-full object-cover sm:aspect-[16/8]"
-      />
-
-      <div className={`${container} grid gap-12 py-14 lg:grid-cols-[1.2fr_0.8fr]`}>
-        <div>
-          <h2 className="font-serif text-3xl text-ink">The work</h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted">{project.story}</p>
+      <header className="relative isolate overflow-hidden bg-ink text-white">
+        <img
+          src={project.cover}
+          alt={`${project.title} after renovation`}
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/95 via-black/60 to-black/30" />
+        <div className={`${container} pt-12 pb-10 sm:pt-40`}>
+          <p className="text-sm text-white/70">
+            <Link to="/work" className="font-semibold text-brass hover:underline">
+              Our work
+            </Link>
+            <span className="px-2">/</span>
+            {label}
+          </p>
+          <h1 className="mt-4 max-w-3xl text-4xl leading-[1.05] font-extrabold tracking-tight text-balance sm:text-6xl">
+            {project.title}
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg text-white/80">{project.summary}</p>
+          <dl className="mt-10 grid grid-cols-2 gap-4 border-t border-white/15 pt-6 sm:grid-cols-4">
+            {facts.map((fact) => (
+              <div key={fact.label}>
+                <dt className="text-xs font-bold tracking-[0.14em] text-brass uppercase">{fact.label}</dt>
+                <dd className="mt-1 font-semibold">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
-        <div className="rounded-2xl border border-line bg-paper p-6">
-          <h2 className="font-serif text-2xl text-ink">Included</h2>
-          <ul className="mt-4">
+      </header>
+
+      <div className={`${container} grid gap-12 py-16 lg:grid-cols-[1.2fr_0.8fr]`}>
+        <div>
+          <SectionHeading title="The" accent="work" />
+          <p className="mt-5 text-lg leading-relaxed text-muted">{project.story}</p>
+        </div>
+        <div className="rounded-2xl bg-ink p-6 text-white sm:p-8">
+          <h2 className="text-2xl font-extrabold">What was included</h2>
+          <ul className="mt-5 space-y-3">
             {project.scope.map((item) => (
-              <li key={item} className="border-t border-line py-3 text-sm">
+              <li key={item} className="flex items-start gap-3 text-sm">
+                <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-brass" />
                 {item}
               </li>
             ))}
@@ -83,7 +88,7 @@ export function ProjectDetail() {
           {service ? (
             <Link
               to={`/quote?project=${encodeURIComponent(service.name)}`}
-              className={`${btnPrimary} mt-6`}
+              className={`${btnPrimary} mt-8 w-full py-3 text-base`}
             >
               Start a project like this
             </Link>
@@ -92,25 +97,28 @@ export function ProjectDetail() {
       </div>
 
       {project.before && project.after ? (
-        <div className={`${container} pb-14`}>
-          <h2 className="font-serif text-3xl text-ink">Before and after</h2>
-          <p className="mt-2 max-w-xl text-sm text-muted">
-            Slide across the photograph to see the room we started with and the room we left.
-          </p>
-          <div className="mt-6">
-            <BeforeAfter
-              before={project.before}
-              after={project.after}
-              beforeAlt={`${project.title} before renovation`}
-              afterAlt={`${project.title} after renovation`}
+        <div className="bg-paper py-16">
+          <div className={container}>
+            <SectionHeading
+              title="Before and"
+              accent="after"
+              text="Drag across the photograph to see the room we started with and the room we left."
             />
+            <div className="mt-8">
+              <BeforeAfter
+                before={project.before}
+                after={project.after}
+                beforeAlt={`${project.title} before renovation`}
+                afterAlt={`${project.title} after renovation`}
+              />
+            </div>
           </div>
         </div>
       ) : null}
 
-      <div className={`${container} pb-16`}>
-        <h2 className="font-serif text-3xl text-ink">More from the job</h2>
-        <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+      <div className={`${container} py-16`}>
+        <SectionHeading title="More from" accent="the job" />
+        <ul className="mt-8 grid gap-4 sm:grid-cols-2">
           {project.gallery.map((image, index) => (
             <li key={image}>
               <img
@@ -124,10 +132,10 @@ export function ProjectDetail() {
       </div>
 
       {related.length > 0 ? (
-        <section className="border-t border-line bg-paper py-14">
+        <section className="border-t border-line bg-paper py-16">
           <div className={container}>
-            <h2 className="font-serif text-3xl text-ink">Other work</h2>
-            <ul className="mt-8 grid gap-8 sm:grid-cols-2">
+            <SectionHeading title="Other" accent="work" />
+            <ul className="mt-8 grid gap-6 sm:grid-cols-2">
               {related.map((item) => (
                 <li key={item.slug}>
                   <ProjectCard project={item} />

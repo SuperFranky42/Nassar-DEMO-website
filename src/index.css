@@ -2,16 +2,25 @@
 
 @theme {
   --font-sans: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
-  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
-  --color-canvas: #f3eee6;
-  --color-paper: #fbf7f1;
-  --color-ink: #1c1712;
-  --color-muted: #5e564c;
-  --color-brass: #8c6840;
-  --color-brass-deep: #6d4f2e;
-  --color-line: #e3dacd;
-  --color-sage: #3d4a39;
-  --color-cream: #e7ddcf;
+  --color-canvas: #ffffff;
+  --color-paper: #f6f5f3;
+  --color-ink: #0a0a0a;
+  --color-coal: #111111;
+  --color-muted: #5b5852;
+  --color-brass: #c9a24a;
+  --color-brass-bright: #d9b660;
+  --color-brass-deep: #8a6a22;
+  --color-line: #e6e3de;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 body {
@@ -24,8 +33,14 @@ body {
 }
 
 ::selection {
-  background: #e4d2b6;
-  color: #1c1712;
+  background: #e9d39a;
+  color: #0a0a0a;
+}
+
+.pattern-dots {
+  background-color: var(--color-coal);
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
 @media (prefers-reduced-motion: reduce) {

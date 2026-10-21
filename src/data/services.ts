@@ -1,3 +1,4 @@
+import type { IconName } from "../components/Icon.tsx";
 import type { CategoryId } from "./categories.ts";
 import { photo } from "./photos.ts";
 
@@ -7,6 +8,7 @@ export type Service = {
   summary: string;
   includes: string[];
   image: string;
+  icon: IconName;
   workCategory?: CategoryId;
 };
 
@@ -23,6 +25,7 @@ export const services: Service[] = [
       "A walkthrough against the plans before we hand over the keys",
     ],
     image: photo("1600585154340-be6161a56a0c"),
+    icon: "home",
   },
   {
     slug: "commercial",
@@ -36,6 +39,7 @@ export const services: Service[] = [
       "A finished space you can open against the drawings",
     ],
     image: photo("1541888946425-d81bb19240f5"),
+    icon: "building",
   },
   {
     slug: "bathroom",
@@ -49,6 +53,7 @@ export const services: Service[] = [
       "A dry, finished room at handover",
     ],
     image: photo("1600566753190-17f0baa2a6c3"),
+    icon: "bath",
     workCategory: "bathroom",
   },
   {
@@ -63,6 +68,7 @@ export const services: Service[] = [
       "Install and a punch list closed with you in the room",
     ],
     image: photo("1600489000022-c2086d79f9d4"),
+    icon: "kitchen",
     workCategory: "kitchen",
   },
   {
@@ -77,6 +83,7 @@ export const services: Service[] = [
       "The frame left square and ready for the next trade",
     ],
     image: photo("1589939705384-5185137a7f0f"),
+    icon: "frame",
   },
   {
     slug: "home-renovations",
@@ -90,6 +97,7 @@ export const services: Service[] = [
       "A final walkthrough against the written scope",
     ],
     image: photo("1600210492486-724fe5c67fb0"),
+    icon: "layers",
     workCategory: "whole-home",
   },
   {
@@ -104,6 +112,7 @@ export const services: Service[] = [
       "A walkthrough in daylight before we call it done",
     ],
     image: photo("1600596542815-ffad4c1539a9"),
+    icon: "brush",
   },
 ];
 

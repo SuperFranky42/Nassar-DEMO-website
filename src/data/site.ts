@@ -1,14 +1,15 @@
 import leadCarpenter from "../../assets/crew/2.jpg";
 import finishCrew from "../../assets/crew/3.jpg";
 import projectLead from "../../assets/crew/project_lead.jpg";
+import { photo } from "./photos.ts";
 
 export const serviceAreas = [
-  { group: "Cities", name: "Broken Arrow, OK" },
-  { group: "Cities", name: "Shawnee, OK" },
-  { group: "Cities", name: "Tahlequah, OK" },
-  { group: "Counties", name: "Tulsa County, OK" },
-  { group: "Counties", name: "Muskogee County, OK" },
-  { group: "Counties", name: "Oklahoma County, OK" },
+  { group: "Cities", name: "Broken Arrow, OK", image: photo("1600596542815-ffad4c1539a9", 900) },
+  { group: "Cities", name: "Shawnee, OK", image: photo("1512917774080-9991f1c4c750", 900) },
+  { group: "Cities", name: "Tahlequah, OK", image: photo("1600585154340-be6161a56a0c", 900) },
+  { group: "Counties", name: "Tulsa County, OK", image: photo("1600210492486-724fe5c67fb0", 900) },
+  { group: "Counties", name: "Muskogee County, OK", image: photo("1600585152220-90363fe7e115", 900) },
+  { group: "Counties", name: "Oklahoma County, OK", image: photo("1586023492125-27b2c045efd7", 900) },
 ] as const;
 
 export const site = {
@@ -31,6 +32,24 @@ export const nav = [
   { to: "/work", label: "Our Work" },
   { to: "/reviews", label: "Reviews" },
   { to: "/about", label: "About" },
+];
+
+export const tickerItems = [
+  `Licensed ${site.license}`,
+  "Written scope before we build",
+  "Free estimates",
+  "Same crew start to finish",
+  `Serving Oklahoma since ${site.established}`,
+  "Residential & commercial",
+];
+
+export const trustChecks = [
+  "Locally owned & operated",
+  "Licensed in Oklahoma",
+  "Written scope & quote",
+  "One project lead",
+  "Free estimates & visits",
+  "Clean, livable job sites",
 ];
 
 export const trust = [
