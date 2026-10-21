@@ -20,7 +20,7 @@ function TickerRun({ hidden = false }: { hidden?: boolean }) {
 export function TrustTicker() {
   return (
     <div className="overflow-hidden bg-brass py-2">
-      <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+      <div className="flex w-max animate-marquee">
         <TickerRun />
         <TickerRun hidden />
         <TickerRun hidden />
