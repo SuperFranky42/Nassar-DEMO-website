@@ -1,7 +1,6 @@
 import { PageHero } from "../components/PageHero.tsx";
 import { QuoteBand } from "../components/QuoteBand.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
-import { photo } from "../data/photos.ts";
 import { roles, serviceAreas, site } from "../data/site.ts";
 import { container } from "../lib/styles.ts";
 
@@ -26,31 +25,9 @@ export function About() {
   return (
     <>
       <PageHero
-        eyebrow="About"
-        title="A crew that treats the homeowner as the client."
-        text="Nassar plans and builds renovations for people who want the work explained in plain language, then done that way."
+        wideTitle
+        title="An experienced team that focuses on quality, reliability, and customer satisfaction from start to finish."
       />
-      <section className={`${container} grid items-center gap-10 border-t border-line py-14 lg:grid-cols-2`}>
-        <div>
-          <h2 className="font-serif text-3xl text-ink">How the work is run</h2>
-          <p className="mt-4 text-lg leading-relaxed text-muted">
-            A job starts with a visit, a measurement, and a written scope. The same
-            project lead stays from that conversation through the final walkthrough.
-            The crew works in {site.serviceArea}, which is how we can come back
-            when a detail needs another look.
-          </p>
-          <p className="mt-4 leading-relaxed text-muted">
-            We would rather explain a limit on day one than discover it in week six.
-            If a room should wait, we say so. If a floor can be saved, we repair it
-            before we talk about replacing it.
-          </p>
-        </div>
-        <img
-          src={photo("1503387762-592deb58ef4e")}
-          alt="Drawings and a renovation in progress"
-          className="aspect-[5/4] w-full rounded-3xl object-cover"
-        />
-      </section>
 
       <section id="who-you-will-meet" className="scroll-mt-24 bg-paper py-14">
         <div className={container}>
@@ -64,8 +41,7 @@ export function About() {
                   className="aspect-[4/5] w-full object-cover object-[center_20%]"
                 />
                 <div className="p-6">
-                  <p className="text-sm font-medium text-ink">{role.name}</p>
-                  <h3 className="mt-1 font-serif text-2xl">{role.title}</h3>
+                  <h3 className="font-serif text-2xl">{role.title}</h3>
                   <p className="mt-3 text-sm text-muted">{role.text}</p>
                 </div>
               </li>

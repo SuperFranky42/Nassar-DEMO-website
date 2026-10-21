@@ -1,4 +1,6 @@
-import { photo } from "./photos.ts";
+import leadCarpenter from "../../assets/crew/2.jpg";
+import finishCrew from "../../assets/crew/3.jpg";
+import projectLead from "../../assets/crew/project_lead.jpg";
 
 export const serviceAreas = [
   { group: "Cities", name: "Broken Arrow, OK" },
@@ -15,13 +17,13 @@ export const site = {
   tagline: "Renovation, handled with care",
   phoneDisplay: "+1 918-990-3807",
   phoneHref: "tel:+19189903807",
-  email: "hello@nassar.demo",
+  email: "nassarconstructionllc@gmail.com",
   address: "6220 Kingston Rd, Oklahoma City, OK, United States, 73122",
   serviceArea:
     "Broken Arrow, Shawnee, Tahlequah, and Tulsa, Muskogee, and Oklahoma counties",
-  hours: "Monday to Friday, 8:00–5:30",
+  hours: "Monday to Saturday, 9:00–5:00. Sunday closed",
   license: "OK #44190",
-  established: "2009",
+  established: "2018",
 };
 
 export const nav = [
@@ -33,61 +35,57 @@ export const nav = [
 
 export const trust = [
   {
-    title: "Licensed and insured",
-    text: `License ${site.license}. Coverage is settled before the first visit, and we say so up front.`,
+    title: "Quality craftsmanship",
+    text: "Cabinets sit flush, tile lines stay true, and paint is checked in daylight before we call a room done.",
   },
   {
-    title: "Close to the job",
-    text: `We work in ${site.serviceArea}, and we come back if a detail needs another look.`,
-    link: { to: "/about#where-we-work", label: "Where we work" },
+    title: "Modern design solutions",
+    text: "Layout, storage, and finishes are chosen for how you use the room, then written into the quote before we build.",
   },
   {
-    title: "A quote you can hold",
-    text: "The invoice follows the written scope. A change is a conversation before it is a cost.",
+    title: "Experienced professionals",
+    text: `A project lead and a finish crew who have done this work since ${site.established}. The same people stay from the first visit through the walkthrough.`,
   },
   {
-    title: "A house you can live in",
-    text: "Dust control and a daily cleanup are part of the job, scheduled with the rooms you still use.",
+    title: "On-time and reliable service",
+    text: "The start date and the milestones are set with the scope. If a day has to move, you hear it from us before it does.",
   },
 ];
 
 export const steps = [
   {
-    title: "The visit",
-    text: "We come to the house, measure, and listen to how you use the room. The proposal comes after that.",
+    title: "Plan",
+    text: "We walk the house, learn how you use the rooms, and set the scope before any design starts.",
   },
   {
-    title: "A written quote",
-    text: "You get a scope, a timeline, and a price in writing before anyone starts.",
+    title: "Design",
+    text: "Layout, materials, and finishes are chosen with you, then written into the quote.",
   },
   {
-    title: "The build",
-    text: "One project lead stays on the job. You hear about a change before the work changes.",
+    title: "Build",
+    text: "Construction stays with one project lead. You hear about a change before the work changes.",
   },
   {
-    title: "The walkthrough",
-    text: "We close the punch list with you in the room, then we leave the site clean.",
+    title: "Deliver",
+    text: "We walk the finished rooms with you, close the punch list, and leave the site clean.",
   },
 ];
 
 export const roles = [
   {
-    name: "Chris Ellison",
     title: "Project lead",
     text: "Your contact from the first visit through the final walkthrough. One person owns the schedule and the answers.",
-    image: photo("1472099645785-5658abf4ff4e", 900),
+    image: projectLead,
   },
   {
-    name: "Marcus Hale",
     title: "Lead carpenter",
     text: "Runs the site day to day, protects the rooms you are still using, and keeps the work in the order we promised.",
-    image: photo("1522529599102-193c0d76b5b6", 900),
+    image: leadCarpenter,
   },
   {
-    name: "Elena Ruiz",
     title: "Finish crew",
     text: "Cabinets, tile, paint, and floors. The people who make the last stretch look like it was planned.",
-    image: photo("1580489944761-15a19d654956", 900),
+    image: finishCrew,
   },
 ];
 

@@ -3,7 +3,7 @@ import { categoryLabel } from "../data/categories.ts";
 import { getProject, projects } from "../data/projects.ts";
 import { reviews } from "../data/reviews.ts";
 import { services } from "../data/services.ts";
-import { site, steps, trust } from "../data/site.ts";
+import { steps, trust } from "../data/site.ts";
 import { ProjectCard } from "../components/ProjectCard.tsx";
 import { ReviewCard } from "../components/ReviewCard.tsx";
 import { SectionHeading } from "../components/SectionHeading.tsx";
@@ -21,15 +21,15 @@ export function Home() {
       <section className={`${container} grid items-center gap-10 py-14 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-16 lg:py-20`}>
         <div className="order-2 lg:order-1">
           <p className="text-xs font-medium tracking-[0.18em] text-brass uppercase">
-            {site.legalName}
+            Nassar Construction LLC
           </p>
           <h1 className="mt-4 font-serif text-5xl leading-[1.05] text-balance text-ink sm:text-6xl lg:text-7xl">
-            A renovation that starts with how you live.
+            Building Your Vision Into Reality!
           </h1>
           <p className="mt-6 max-w-md text-lg text-pretty text-muted">
-            Nassar plans, builds, and finishes kitchens, baths, and whole homes
-            for people who want a clear quote, one person to call, and a crew
-            that leaves the house livable.
+            At Nassar Construction LLC, we turn your ideas into strong, modern,
+            and high-quality construction projects. From planning to completion,
+            our experienced team delivers excellence every step of the way.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link to="/quote" className={btnPrimary}>
@@ -63,11 +63,6 @@ export function Home() {
             <li key={item.title}>
               <p className="font-medium text-ink">{item.title}</p>
               <p className="mt-2 text-sm text-muted">{item.text}</p>
-              {item.link ? (
-                <Link to={item.link.to} className={`${textLink} mt-3 inline-block text-sm`}>
-                  {item.link.label}
-                </Link>
-              ) : null}
             </li>
           ))}
         </ul>
@@ -77,8 +72,8 @@ export function Home() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
             eyebrow="Services"
-            title="Rooms we rebuild"
-            text="Each service starts with a visit and ends with a written scope you can compare to the finished room."
+            title="What we build"
+            text="From a kitchen remodel to a full build. Each service starts with a visit and a written scope."
           />
           <Link to="/services" className={textLink}>
             All services
@@ -155,8 +150,8 @@ export function Home() {
         <div className={container}>
           <SectionHeading
             eyebrow="Process"
-            title="How a project works"
-            text="Four steps, the same ones on every job. You always know which step you are in."
+            title="Plan, design, build, deliver"
+            text="From planning and design to construction and final delivery, we handle every step with precision and quality. Whether it's a custom home, kitchen remodel, bathroom renovation, or outdoor living space, our team is committed to bringing your vision to life with expert craftsmanship and reliable service."
           />
           <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((step, index) => (

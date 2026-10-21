@@ -13,7 +13,7 @@ export function Services() {
       <PageHero
         eyebrow="Services"
         title="Work matched to the room you have."
-        text="Kitchens, baths, whole homes, floors, paint, and additions. Each one starts with a visit and a written scope."
+        text="Residential and commercial construction, remodels, framing, and interior and exterior work. Each one starts with a visit and a written scope."
       />
       {services.map((service, index) => {
         const flipped = index % 2 === 1;
@@ -41,12 +41,14 @@ export function Services() {
                   </li>
                 ))}
               </ul>
-              <Link
-                to={`/work?type=${service.slug}`}
-                className={`${textLink} mt-6 inline-block`}
-              >
-                See this work
-              </Link>
+              {service.workCategory ? (
+                <Link
+                  to={`/work?type=${service.workCategory}`}
+                  className={`${textLink} mt-6 inline-block`}
+                >
+                  See this work
+                </Link>
+              ) : null}
             </div>
           </article>
         );

@@ -2,30 +2,44 @@ import type { CategoryId } from "./categories.ts";
 import { photo } from "./photos.ts";
 
 export type Service = {
-  slug: CategoryId;
+  slug: string;
   name: string;
   summary: string;
   includes: string[];
   image: string;
+  workCategory?: CategoryId;
 };
 
 export const services: Service[] = [
   {
-    slug: "kitchen",
-    name: "Kitchen remodeling",
+    slug: "residential",
+    name: "Residential Construction",
     summary:
-      "A new layout, cabinets, and finishes for a kitchen you actually cook in. We sequence the work so the rest of the house stays usable.",
+      "New homes and additions, built as one scope. Structure, envelope, and the rooms you will live in are written down before we start.",
     includes: [
-      "Layout, cabinet plan, and lighting",
-      "Counters, backsplash, and fixtures",
-      "Demo, plus plumbing and electrical coordination",
-      "Install and a punch list closed with you in the room",
+      "How the new work meets the lot, or the house already there",
+      "Foundation, framing, roof, windows, and insulation",
+      "Interior finishes included in the same written scope",
+      "A walkthrough against the plans before we hand over the keys",
     ],
-    image: photo("1600489000022-c2086d79f9d4"),
+    image: photo("1600585154340-be6161a56a0c"),
+  },
+  {
+    slug: "commercial",
+    name: "Commercial Construction",
+    summary:
+      "Offices, tenant spaces, and small commercial buildings. The scope, the schedule, and the inspections are set before the first day on site.",
+    includes: [
+      "A written scope matched to how the space will be used",
+      "Structure, build-out, and the code items called out up front",
+      "Trades and inspections kept to the schedule we agreed",
+      "A finished space you can open against the drawings",
+    ],
+    image: photo("1541888946425-d81bb19240f5"),
   },
   {
     slug: "bathroom",
-    name: "Bathroom renovation",
+    name: "Bathroom Remodeling",
     summary:
       "Wet rooms rebuilt to stay dry. We handle waterproofing, ventilation, and the finishes you see every morning.",
     includes: [
@@ -35,10 +49,38 @@ export const services: Service[] = [
       "A dry, finished room at handover",
     ],
     image: photo("1600566753190-17f0baa2a6c3"),
+    workCategory: "bathroom",
   },
   {
-    slug: "whole-home",
-    name: "Whole-home renovation",
+    slug: "kitchen",
+    name: "Kitchen Remodeling",
+    summary:
+      "A new layout, cabinets, and finishes for a kitchen you actually cook in. We sequence the work so the rest of the house stays usable.",
+    includes: [
+      "Layout, cabinet plan, and lighting",
+      "Counters, backsplash, and fixtures",
+      "Demo, plus plumbing and electrical coordination",
+      "Install and a punch list closed with you in the room",
+    ],
+    image: photo("1600489000022-c2086d79f9d4"),
+    workCategory: "kitchen",
+  },
+  {
+    slug: "framing",
+    name: "Framing & Structural Work",
+    summary:
+      "Walls, floors, and roofs the rest of the job stands on. We frame to the plan, and we say so if the existing structure needs a change.",
+    includes: [
+      "Layout checked against the drawings before lumber goes up",
+      "Walls, floors, roof framing, and headers",
+      "A conversation before we change anything found in the existing structure",
+      "The frame left square and ready for the next trade",
+    ],
+    image: photo("1589939705384-5185137a7f0f"),
+  },
+  {
+    slug: "home-renovations",
+    name: "Home Renovations",
     summary:
       "Several rooms, one plan. We sequence the job so you can keep living in the house when the scope allows it.",
     includes: [
@@ -48,49 +90,34 @@ export const services: Service[] = [
       "A final walkthrough against the written scope",
     ],
     image: photo("1600210492486-724fe5c67fb0"),
+    workCategory: "whole-home",
   },
   {
-    slug: "flooring",
-    name: "Flooring and finishes",
+    slug: "interior-exterior",
+    name: "Interior & Exterior Improvements",
     summary:
-      "Floors that meet the rest of the house. We check the subfloor first, then install, sand, or tile so the transitions disappear.",
+      "The work that changes how a house looks and wears: floors, paint, siding, and the details between rooms.",
     includes: [
-      "Subfloor check before any material goes down",
-      "Hardwood, engineered wood, or tile",
-      "Transitions, baseboards, and stair nosing",
-      "A clear cure time before furniture comes back",
+      "Interior floors, paint, trim, and ceilings",
+      "Exterior siding, paint, and the trim at doors and windows",
+      "Prep checked before the finish material goes on",
+      "A walkthrough in daylight before we call it done",
     ],
-    image: photo("1615873968403-89e068629265"),
-  },
-  {
-    slug: "painting",
-    name: "Painting",
-    summary:
-      "Color chosen in the light of the actual room, then applied with the prep that makes it last past the first year.",
-    includes: [
-      "Color samples checked in daylight and at night",
-      "Patch, sand, caulk, and prime",
-      "Walls, trim, ceilings, and the stair",
-      "A walkthrough while the light is still honest",
-    ],
-    image: photo("1616594039964-ae9021a400a0"),
-  },
-  {
-    slug: "addition",
-    name: "Additions",
-    summary:
-      "A new room that feels like it was always part of the house. Structure, envelope, and finishes are one scope.",
-    includes: [
-      "How the new room meets the old roof and walls",
-      "Structure, insulation, and windows",
-      "Interior finishes that match the rooms beside it",
-      "Permit path written into the scope before we start",
-    ],
-    image: photo("1600585154340-be6161a56a0c"),
+    image: photo("1600596542815-ffad4c1539a9"),
   },
 ];
 
-export function serviceBySlug(slug: CategoryId) {
+const projectCategoryService: Record<CategoryId, string> = {
+  kitchen: "kitchen",
+  bathroom: "bathroom",
+  "whole-home": "home-renovations",
+  flooring: "interior-exterior",
+  painting: "interior-exterior",
+  addition: "residential",
+};
+
+export function serviceForProject(category: CategoryId) {
+  const slug = projectCategoryService[category];
   return services.find((service) => service.slug === slug);
 }
 

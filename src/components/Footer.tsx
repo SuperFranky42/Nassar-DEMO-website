@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo-lockup.png";
 import { nav, serviceAreas, site } from "../data/site.ts";
 import { container } from "../lib/styles.ts";
 
@@ -7,8 +8,12 @@ export function Footer() {
     <footer className="bg-ink text-paper">
       <div className={`${container} grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4`}>
         <div>
-          <p className="font-serif text-2xl">{site.name}</p>
-          <p className="mt-3 max-w-xs text-sm text-paper/70">
+          <img
+            src={logo}
+            alt="The Nassar Construction LLC"
+            className="h-auto w-full max-w-72"
+          />
+          <p className="mt-5 max-w-xs text-sm text-paper/70">
             {site.tagline}. Kitchens, baths, and whole homes, with a written
             scope before the work starts.
           </p>
@@ -50,15 +55,6 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 text-xs tracking-[0.16em] text-paper/50 uppercase">
-            For this demo
-          </p>
-          <Link
-            to="/crm"
-            className="mt-2 inline-block text-sm text-cream underline underline-offset-4"
-          >
-            Team view
-          </Link>
         </div>
       </div>
       <p className="border-t border-paper/15 px-5 py-4 text-center text-xs text-paper/50">

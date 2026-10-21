@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import logo from "../../assets/logo-lockup.png";
 import { nav, roles, site } from "../data/site.ts";
 import { btnPrimary, container } from "../lib/styles.ts";
 
@@ -21,17 +22,23 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md">
       <div className="h-1 bg-brass" />
-      <div className={`${container} flex h-16 items-center justify-between gap-4`}>
-        <Link to="/" className="flex items-center gap-3">
-          <span className="grid h-9 w-9 place-items-center rounded-md bg-ink font-serif text-lg text-cream">
-            N
-          </span>
-          <span>
-            <span className="block font-serif text-lg leading-none">{site.name}</span>
-            <span className="block text-[11px] tracking-[0.16em] text-muted uppercase">
-              Renovation
-            </span>
-          </span>
+      <div className={`${container} flex items-center justify-between gap-4 py-2`}>
+        <Link
+          to="/"
+          aria-label="The Nassar Construction LLC"
+          className="shrink-0"
+          onClick={() => {
+            setOpen(false);
+            if (location.pathname === "/" && location.hash === "") {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        >
+          <img
+            src={logo}
+            alt="The Nassar Construction LLC"
+            className="h-12 w-auto brightness-0 sm:h-14 lg:h-16"
+          />
         </Link>
         <nav className="hidden items-center gap-6 md:flex" aria-label="Primary">
           {nav.map((item) => (
@@ -48,7 +55,7 @@ export function Header() {
             >
               <img
                 src={lead.image}
-                alt={`${lead.name}, ${lead.title}`}
+                alt={lead.title}
                 className="h-9 w-9 rounded-full object-cover"
               />
             </Link>

@@ -5,7 +5,7 @@ import { QuoteBand } from "../components/QuoteBand.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
 import { categoryLabel } from "../data/categories.ts";
 import { getProject, relatedProjects } from "../data/projects.ts";
-import { serviceBySlug } from "../data/services.ts";
+import { serviceForProject } from "../data/services.ts";
 import { btnPrimary, container, textLink } from "../lib/styles.ts";
 
 export function ProjectDetail() {
@@ -27,7 +27,7 @@ export function ProjectDetail() {
   }
 
   const label = categoryLabel(project.category);
-  const service = serviceBySlug(project.category);
+  const service = serviceForProject(project.category);
   const related = relatedProjects(project.slug);
   const facts = [
     { label: "Location", value: project.location },

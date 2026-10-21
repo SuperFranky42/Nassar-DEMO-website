@@ -1,7 +1,6 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { budgetOptions, serviceAreas, timelineOptions } from "../data/site.ts";
 import { projectTypeOptions } from "../data/services.ts";
-import { addLead } from "../crm/storage.ts";
 import { btnPrimary, btnSecondary } from "../lib/styles.ts";
 
 type FormState = {
@@ -91,7 +90,6 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
     projectType: startingType(initialProjectType),
   });
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
-  const [formError, setFormError] = useState("");
   const [receipt, setReceipt] = useState<{ name: string; projectType: string } | null>(
     null,
   );
@@ -104,28 +102,9 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
     event.preventDefault();
     const nextErrors = validate(form);
     setErrors(nextErrors);
-    setFormError("");
     if (Object.keys(nextErrors).length > 0) return;
 
-    const payload = {
-      name: form.name.trim(),
-      email: form.email.trim(),
-      phone: form.phone.trim(),
-      projectType: form.projectType,
-      area: form.area,
-      budget: form.budget,
-      timeline: form.timeline,
-      message: form.message.trim(),
-    };
-
-    try {
-      addLead(payload);
-      setReceipt({ name: payload.name, projectType: payload.projectType });
-    } catch {
-      setFormError(
-        "This browser blocked saving the request. Allow site storage and try again.",
-      );
-    }
+    setReceipt({ name: form.name.trim(), projectType: form.projectType });
   }
 
   if (receipt) {
@@ -140,10 +119,7 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
           Your note about {receipt.projectType.toLowerCase()} is with the team. We
           will follow up to set a visit and a written quote.
         </p>
-        <p className="mt-4 text-sm text-muted">
-          This demo stores the request in this browser. Open Team view in the footer
-          to see it under New. No email is sent.
-        </p>
+        <p className="mt-4 text-sm text-muted">Demo only: no email is sent.</p>
         <button
           type="button"
           className={`${btnSecondary} mt-6`}
@@ -167,11 +143,6 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
     >
       <h2 className="font-serif text-3xl text-ink">Project details</h2>
       <p className="mt-2 text-sm text-muted">All fields are required.</p>
-      {formError ? (
-        <p className="mt-4 text-sm text-brass-deep" role="alert">
-          {formError}
-        </p>
-      ) : null}
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         <Field id="name" label="Name" error={errors.name}>
           <input
@@ -307,9 +278,7 @@ export function QuoteForm({ initialProjectType }: QuoteFormProps) {
         <button type="submit" className={btnPrimary}>
           Send the request
         </button>
-        <p className="text-sm text-muted">
-          Demo only: saved in this browser and shown in Team view.
-        </p>
+        <p className="text-sm text-muted">Demo only: no email is sent.</p>
       </div>
     </form>
   );
