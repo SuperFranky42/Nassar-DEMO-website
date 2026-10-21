@@ -5,6 +5,8 @@ import { photo } from "../../data/photos.ts";
 import { services } from "../../data/services.ts";
 import { btnPrimaryLarge, container, sectionDark } from "../../lib/styles.ts";
 import { Icon } from "../Icon.tsx";
+import { revealDelay } from "../../lib/motion.ts";
+import { Reveal } from "../Reveal.tsx";
 import { SectionHeading } from "../SectionHeading.tsx";
 
 const houseImage = photo("1618221195710-dd6b41faaea6", 1400);
@@ -17,14 +19,17 @@ export function NeedsWork() {
   return (
     <section className={sectionDark}>
       <div className={container}>
-        <SectionHeading
-          dark
-          center
-          title="What Needs"
-          accent="Work?"
-          text="Pick the problem you are living with to see what causes it and how we fix it."
-        />
+        <Reveal>
+          <SectionHeading
+            dark
+            center
+            title="What Needs"
+            accent="Work?"
+            text="Pick the problem you are living with to see what causes it and how we fix it."
+          />
+        </Reveal>
 
+        <Reveal delay={revealDelay(1)}>
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.25fr_1fr] lg:items-start">
           <div>
             <div className="relative overflow-hidden rounded-2xl border-4 border-white/10">
@@ -106,6 +111,7 @@ export function NeedsWork() {
             </Link>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -5,6 +5,8 @@ import { ProjectCard } from "../components/ProjectCard.tsx";
 import { QuoteBand } from "../components/QuoteBand.tsx";
 import { SectionHeading } from "../components/SectionHeading.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
+import { Reveal } from "../components/Reveal.tsx";
+import { revealDelay } from "../lib/motion.ts";
 import { categoryLabel } from "../data/categories.ts";
 import { getProject, relatedProjects } from "../data/projects.ts";
 import { serviceForProject } from "../data/services.ts";
@@ -20,10 +22,12 @@ export function ProjectDetail() {
   if (!project) {
     return (
       <div className={`${container} py-24`}>
-        <h1 className="text-4xl font-extrabold text-ink">That project is not in this demo.</h1>
-        <Link to="/work" className={`${textLink} mt-6 inline-block`}>
-          Back to our work
-        </Link>
+        <Reveal>
+          <h1 className="text-4xl font-extrabold text-ink">That project is not in this demo.</h1>
+          <Link to="/work" className={`${textLink} mt-6 inline-block`}>
+            Back to our work
+          </Link>
+        </Reveal>
       </div>
     );
   }
@@ -48,6 +52,7 @@ export function ProjectDetail() {
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/95 via-black/60 to-black/30" />
         <div className={`${container} pt-12 pb-10 sm:pt-40`}>
+          <Reveal>
           <p className="text-sm text-white/70">
             <Link to="/work" className="font-semibold text-brass hover:underline">
               Our work
@@ -67,14 +72,18 @@ export function ProjectDetail() {
               </div>
             ))}
           </dl>
+          </Reveal>
         </div>
       </header>
 
       <div className={`${container} grid gap-12 py-16 lg:grid-cols-[1.2fr_0.8fr]`}>
+        <Reveal>
         <div>
           <SectionHeading title="The" accent="work" />
           <p className="mt-5 text-lg leading-relaxed text-muted">{project.story}</p>
         </div>
+        </Reveal>
+        <Reveal delay={revealDelay(1)}>
         <div className="rounded-2xl bg-ink p-6 text-white sm:p-8">
           <h2 className="text-2xl font-extrabold">What was included</h2>
           <ul className="mt-5 space-y-3">
@@ -94,11 +103,13 @@ export function ProjectDetail() {
             </Link>
           ) : null}
         </div>
+        </Reveal>
       </div>
 
       {project.before && project.after ? (
         <div className="bg-paper py-16">
           <div className={container}>
+            <Reveal>
             <SectionHeading
               title="Before and"
               accent="after"
@@ -112,20 +123,25 @@ export function ProjectDetail() {
                 afterAlt={`${project.title} after renovation`}
               />
             </div>
+            </Reveal>
           </div>
         </div>
       ) : null}
 
       <div className={`${container} py-16`}>
-        <SectionHeading title="More from" accent="the job" />
+        <Reveal>
+          <SectionHeading title="More from" accent="the job" />
+        </Reveal>
         <ul className="mt-8 grid gap-4 sm:grid-cols-2">
           {project.gallery.map((image, index) => (
             <li key={image}>
-              <img
-                src={image}
-                alt={`${project.title}, detail ${index + 1}`}
-                className="aspect-[4/3] w-full rounded-2xl object-cover"
-              />
+              <Reveal delay={revealDelay(index)}>
+                <img
+                  src={image}
+                  alt={`${project.title}, detail ${index + 1}`}
+                  className="aspect-[4/3] w-full rounded-2xl object-cover"
+                />
+              </Reveal>
             </li>
           ))}
         </ul>
@@ -134,11 +150,15 @@ export function ProjectDetail() {
       {related.length > 0 ? (
         <section className="border-t border-line bg-paper py-16">
           <div className={container}>
-            <SectionHeading title="Other" accent="work" />
+            <Reveal>
+              <SectionHeading title="Other" accent="work" />
+            </Reveal>
             <ul className="mt-8 grid gap-6 sm:grid-cols-2">
-              {related.map((item) => (
+              {related.map((item, index) => (
                 <li key={item.slug}>
-                  <ProjectCard project={item} />
+                  <Reveal delay={revealDelay(index)} className="h-full">
+                    <ProjectCard project={item} />
+                  </Reveal>
                 </li>
               ))}
             </ul>

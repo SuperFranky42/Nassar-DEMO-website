@@ -3,6 +3,8 @@ import { Icon } from "../components/Icon.tsx";
 import { PageHero } from "../components/PageHero.tsx";
 import { QuoteBand } from "../components/QuoteBand.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
+import { Reveal } from "../components/Reveal.tsx";
+import { revealDelay } from "../lib/motion.ts";
 import { services } from "../data/services.ts";
 import { btnPrimary, btnSecondary, container } from "../lib/styles.ts";
 
@@ -18,7 +20,8 @@ export function Services() {
         text="Residential and commercial construction, remodels, framing, and interior and exterior work. Each one starts with a visit and a written scope."
       />
       <nav className="border-b border-line bg-paper" aria-label="Services on this page">
-        <ul className={`${container} flex gap-2 overflow-x-auto py-4 lg:flex-wrap lg:overflow-visible`}>
+        <Reveal>
+          <ul className={`${container} flex gap-2 overflow-x-auto py-4 lg:flex-wrap lg:overflow-visible`}>
           {services.map((service) => (
             <li key={service.slug} className="shrink-0">
               <a
@@ -30,7 +33,8 @@ export function Services() {
               </a>
             </li>
           ))}
-        </ul>
+          </ul>
+        </Reveal>
       </nav>
       {services.map((service, index) => {
         const flipped = index % 2 === 1;
@@ -41,11 +45,14 @@ export function Services() {
             className={`scroll-mt-32 py-16 lg:py-20 ${flipped ? "bg-paper" : "bg-canvas"}`}
           >
             <div className={`${container} grid items-center gap-10 lg:grid-cols-2 lg:gap-16`}>
-              <img
-                src={service.image}
-                alt={service.name}
-                className={`aspect-[5/4] w-full rounded-2xl object-cover shadow-xl shadow-black/10 ${flipped ? "lg:order-2" : ""}`}
-              />
+              <Reveal className={flipped ? "lg:order-2" : ""}>
+                <img
+                  src={service.image}
+                  alt={service.name}
+                  className="aspect-[5/4] w-full rounded-2xl object-cover shadow-xl shadow-black/10"
+                />
+              </Reveal>
+              <Reveal delay={revealDelay(1)}>
               <div>
                 <span className="grid h-14 w-14 place-items-center rounded-xl bg-ink text-brass">
                   <Icon name={service.icon} className="h-6 w-6" />
@@ -79,6 +86,7 @@ export function Services() {
                   ) : null}
                 </div>
               </div>
+              </Reveal>
             </div>
           </section>
         );

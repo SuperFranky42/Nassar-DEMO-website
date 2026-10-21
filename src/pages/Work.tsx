@@ -3,6 +3,8 @@ import { PageHero } from "../components/PageHero.tsx";
 import { ProjectCard } from "../components/ProjectCard.tsx";
 import { QuoteBand } from "../components/QuoteBand.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
+import { Reveal } from "../components/Reveal.tsx";
+import { revealDelay } from "../lib/motion.ts";
 import { categories, isCategory } from "../data/categories.ts";
 import { projects } from "../data/projects.ts";
 import { container } from "../lib/styles.ts";
@@ -26,7 +28,8 @@ export function Work() {
         text="A sample of kitchens, baths, and whole-home jobs. Open a project for the scope, the timeline, and a before-and-after."
       />
       <div className={`${container} pt-12`}>
-        <div className="flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Filter projects">
+        <Reveal>
+          <div className="flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Filter projects">
           {filters.map((filter) => {
             const selected = active === filter.id;
             return (
@@ -48,17 +51,20 @@ export function Work() {
               </button>
             );
           })}
-        </div>
-        <p className="mt-6 text-sm text-muted">
-          {visible.length} {visible.length === 1 ? "project" : "projects"}
-        </p>
+          </div>
+          <p className="mt-6 text-sm text-muted">
+            {visible.length} {visible.length === 1 ? "project" : "projects"}
+          </p>
+        </Reveal>
         {visible.length === 0 ? (
           <p className="mt-8 text-muted">No sample projects in that category yet.</p>
         ) : (
           <ul className="mt-6 grid gap-6 pb-20 sm:grid-cols-2 lg:grid-cols-3">
-            {visible.map((project) => (
+            {visible.map((project, index) => (
               <li key={project.slug}>
-                <ProjectCard project={project} />
+                <Reveal delay={revealDelay(index)} className="h-full">
+                  <ProjectCard project={project} />
+                </Reveal>
               </li>
             ))}
           </ul>

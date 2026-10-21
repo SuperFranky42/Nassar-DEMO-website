@@ -3,6 +3,8 @@ import { Icon } from "../components/Icon.tsx";
 import { PageHero } from "../components/PageHero.tsx";
 import { QuoteForm } from "../components/QuoteForm.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
+import { Reveal } from "../components/Reveal.tsx";
+import { revealDelay } from "../lib/motion.ts";
 import { site, steps } from "../data/site.ts";
 import { container } from "../lib/styles.ts";
 
@@ -21,7 +23,10 @@ export function Quote() {
       />
       <div className="bg-paper">
         <div className={`${container} grid gap-12 py-16 lg:grid-cols-[1.4fr_0.8fr]`}>
-          <QuoteForm initialProjectType={initialProjectType} />
+          <Reveal>
+            <QuoteForm initialProjectType={initialProjectType} />
+          </Reveal>
+          <Reveal delay={revealDelay(1)}>
           <aside>
             <h2 className="text-2xl font-extrabold text-ink">What happens next</h2>
             <ol className="mt-6 space-y-5">
@@ -54,6 +59,7 @@ export function Quote() {
               <p className="mt-2 text-white/60">Visits across {site.serviceArea}.</p>
             </div>
           </aside>
+          </Reveal>
         </div>
       </div>
     </>

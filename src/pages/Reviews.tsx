@@ -3,6 +3,8 @@ import { PageHero } from "../components/PageHero.tsx";
 import { QuoteBand } from "../components/QuoteBand.tsx";
 import { ReviewCard } from "../components/ReviewCard.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
+import { Reveal } from "../components/Reveal.tsx";
+import { revealDelay } from "../lib/motion.ts";
 import { reviewAverage, reviews, reviewThemes } from "../data/reviews.ts";
 import { container } from "../lib/styles.ts";
 
@@ -20,16 +22,23 @@ export function Reviews() {
       />
       <section className="pattern-dots py-14 text-white">
         <div className={container}>
-          <p className="flex flex-wrap items-center gap-3">
-            <span className="text-3xl font-extrabold">{average.toFixed(1)}</span>
-            <Stars count={Math.round(average)} className="h-5 w-5" />
-            <span className="text-sm text-white/70">from {reviews.length} sample reviews</span>
-          </p>
+          <Reveal>
+            <p className="flex flex-wrap items-center gap-3">
+              <span className="text-3xl font-extrabold">{average.toFixed(1)}</span>
+              <Stars count={Math.round(average)} className="h-5 w-5" />
+              <span className="text-sm text-white/70">from {reviews.length} sample reviews</span>
+            </p>
+          </Reveal>
           <ul className="mt-8 grid gap-5 lg:grid-cols-3">
-            {reviewThemes.map((theme) => (
-              <li key={theme.title} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <h2 className="text-xl font-extrabold text-brass">{theme.title}</h2>
-                <p className="mt-3 text-sm text-white/70">{theme.text}</p>
+            {reviewThemes.map((theme, index) => (
+              <li key={theme.title}>
+                <Reveal
+                  delay={revealDelay(index)}
+                  className="h-full rounded-2xl border border-white/10 bg-white/5 p-6"
+                >
+                  <h2 className="text-xl font-extrabold text-brass">{theme.title}</h2>
+                  <p className="mt-3 text-sm text-white/70">{theme.text}</p>
+                </Reveal>
               </li>
             ))}
           </ul>
@@ -37,9 +46,11 @@ export function Reviews() {
       </section>
       <div className={`${container} py-16`}>
         <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {reviews.map((review) => (
+          {reviews.map((review, index) => (
             <li key={review.id}>
-              <ReviewCard review={review} />
+              <Reveal delay={revealDelay(index)} className="h-full">
+                <ReviewCard review={review} />
+              </Reveal>
             </li>
           ))}
         </ul>

@@ -5,6 +5,8 @@ import { SectionHeading } from "../components/SectionHeading.tsx";
 import { usePageTitle } from "../components/usePageTitle.ts";
 import { roles, serviceAreas, site } from "../data/site.ts";
 import { container } from "../lib/styles.ts";
+import { Reveal } from "../components/Reveal.tsx";
+import { revealDelay } from "../lib/motion.ts";
 
 const promises = [
   {
@@ -42,19 +44,26 @@ export function About() {
 
       <section id="who-you-will-meet" className="scroll-mt-32 bg-canvas py-20">
         <div className={container}>
-          <SectionHeading title="Who you will" accent="meet" />
+          <Reveal>
+            <SectionHeading title="Who you will" accent="meet" />
+          </Reveal>
           <ul className="mt-10 grid gap-6 lg:grid-cols-3">
-            {roles.map((role) => (
-              <li key={role.title} className="overflow-hidden rounded-2xl border border-line bg-white">
-                <img
-                  src={role.image}
-                  alt=""
-                  className="aspect-[4/5] w-full object-cover object-[center_20%]"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-extrabold">{role.title}</h3>
-                  <p className="mt-3 text-sm text-muted">{role.text}</p>
-                </div>
+            {roles.map((role, index) => (
+              <li key={role.title}>
+                <Reveal
+                  delay={revealDelay(index)}
+                  className="h-full overflow-hidden rounded-2xl border border-line bg-white"
+                >
+                  <img
+                    src={role.image}
+                    alt=""
+                    className="aspect-[4/5] w-full object-cover object-[center_20%]"
+                  />
+                  <div className="p-6">
+                    <h3 className="text-xl font-extrabold">{role.title}</h3>
+                    <p className="mt-3 text-sm text-muted">{role.text}</p>
+                  </div>
+                </Reveal>
               </li>
             ))}
           </ul>
@@ -63,13 +72,20 @@ export function About() {
 
       <section className="pattern-dots py-20 text-white">
         <div className={container}>
-          <SectionHeading dark title="Working around a" accent="lived-in house" />
+          <Reveal>
+            <SectionHeading dark title="Working around a" accent="lived-in house" />
+          </Reveal>
           <ul className="mt-10 grid gap-6 md:grid-cols-3">
-            {promises.map((promise) => (
-              <li key={promise.title} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <Icon name="shield" className="h-7 w-7 text-brass" />
-                <h3 className="mt-4 text-xl font-extrabold">{promise.title}</h3>
-                <p className="mt-3 text-sm text-white/70">{promise.text}</p>
+            {promises.map((promise, index) => (
+              <li key={promise.title}>
+                <Reveal
+                  delay={revealDelay(index)}
+                  className="h-full rounded-2xl border border-white/10 bg-white/5 p-6"
+                >
+                  <Icon name="shield" className="h-7 w-7 text-brass" />
+                  <h3 className="mt-4 text-xl font-extrabold">{promise.title}</h3>
+                  <p className="mt-3 text-sm text-white/70">{promise.text}</p>
+                </Reveal>
               </li>
             ))}
           </ul>
@@ -78,6 +94,7 @@ export function About() {
 
       <section id="where-we-work" className="scroll-mt-32 bg-paper py-20">
         <div className={`${container} grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center`}>
+          <Reveal>
           <div>
             <SectionHeading
               title="Where we"
@@ -128,6 +145,8 @@ export function About() {
               </div>
             </dl>
           </div>
+          </Reveal>
+          <Reveal delay={revealDelay(1)}>
           <div className="aspect-[4/3] overflow-hidden rounded-2xl border-4 border-white shadow-xl shadow-black/10">
             <iframe
               title={`Map of the ${site.legalName} office`}
@@ -137,6 +156,7 @@ export function About() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
+          </Reveal>
         </div>
       </section>
       <QuoteBand

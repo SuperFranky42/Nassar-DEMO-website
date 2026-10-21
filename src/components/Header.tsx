@@ -4,6 +4,7 @@ import logo from "../../assets/logo-lockup.png";
 import { nav, site } from "../data/site.ts";
 import { btnPrimary, container } from "../lib/styles.ts";
 import { Icon } from "./Icon.tsx";
+import { useMotion } from "../lib/motion.ts";
 import { TrustTicker } from "./TrustTicker.tsx";
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
@@ -11,6 +12,7 @@ const navClass = ({ isActive }: { isActive: boolean }) =>
 
 export function Header() {
   const location = useLocation();
+  const { resetMotion } = useMotion();
   const [open, setOpen] = useState(false);
   const [openPath, setOpenPath] = useState(location.pathname);
 
@@ -28,8 +30,11 @@ export function Header() {
           className="shrink-0"
           onClick={() => {
             setOpen(false);
-            if (location.pathname === "/" && location.hash === "") {
-              window.scrollTo({ top: 0, behavior: "smooth" });
+            if (location.pathname === "/") {
+              if (location.hash === "") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+              resetMotion();
             }
           }}
         >
