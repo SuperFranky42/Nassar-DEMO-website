@@ -1,15 +1,22 @@
+import brokenArrow from "../../assets/areas/broken-arrow.jpg";
+import muskogeeCounty from "../../assets/areas/muskogee-county.jpg";
+import oklahomaCounty from "../../assets/areas/oklahoma-county.jpg";
+import shawnee from "../../assets/areas/shawnee.jpg";
+import tahlequah from "../../assets/areas/tahlequah.jpg";
+import tulsaCounty from "../../assets/areas/tulsa-county.jpg";
 import leadCarpenter from "../../assets/crew/2.jpg";
 import finishCrew from "../../assets/crew/3.jpg";
 import projectLead from "../../assets/crew/project_lead.jpg";
-import { photo } from "./photos.ts";
 
+// Public-domain and CC0 photos from Wikimedia Commons. Each photographer
+// released the copyright, including worldwide.
 export const serviceAreas = [
-  { group: "Cities", name: "Broken Arrow, OK", image: photo("1600596542815-ffad4c1539a9", 900) },
-  { group: "Cities", name: "Shawnee, OK", image: photo("1512917774080-9991f1c4c750", 900) },
-  { group: "Cities", name: "Tahlequah, OK", image: photo("1600585154340-be6161a56a0c", 900) },
-  { group: "Counties", name: "Tulsa County, OK", image: photo("1600210492486-724fe5c67fb0", 900) },
-  { group: "Counties", name: "Muskogee County, OK", image: photo("1600585152220-90363fe7e115", 900) },
-  { group: "Counties", name: "Oklahoma County, OK", image: photo("1586023492125-27b2c045efd7", 900) },
+  { group: "Cities", name: "Broken Arrow, OK", image: brokenArrow },
+  { group: "Cities", name: "Shawnee, OK", image: shawnee },
+  { group: "Cities", name: "Tahlequah, OK", image: tahlequah },
+  { group: "Counties", name: "Tulsa County, OK", image: tulsaCounty },
+  { group: "Counties", name: "Muskogee County, OK", image: muskogeeCounty },
+  { group: "Counties", name: "Oklahoma County, OK", image: oklahomaCounty },
 ] as const;
 
 export const site = {

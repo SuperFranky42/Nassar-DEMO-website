@@ -37,9 +37,6 @@ export function ServiceAreas() {
                     <Icon name="pin" className="h-5 w-5 text-brass" />
                     {area.name.replace(", OK", "")}
                   </span>
-                  <span className="absolute top-4 right-4 rounded-md bg-white/15 px-2 py-1 text-xs font-bold tracking-wider text-white uppercase backdrop-blur">
-                    {area.group === "Cities" ? "City" : "County"}
-                  </span>
                 </Link>
               </Reveal>
             </li>
