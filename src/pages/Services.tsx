@@ -14,10 +14,9 @@ export function Services() {
   return (
     <>
       <PageHero
-        eyebrow="Services"
-        title="Work matched to the"
-        accent="room you have."
-        text="Residential and commercial construction, remodels, framing, and interior and exterior work. Each one starts with a visit and a written scope."
+        title="Quality is never"
+        accent="an accident"
+        text="From steel structures to premium interior finishes, we deliver quality craftsmanship on every project. Your vision is our priority, and we build with precision, durability, and care."
       />
       <nav className="border-b border-line bg-paper" aria-label="Services on this page">
         <Reveal>
@@ -54,10 +53,7 @@ export function Services() {
               </Reveal>
               <Reveal delay={revealDelay(1)}>
               <div>
-                <span className="grid h-14 w-14 place-items-center rounded-xl bg-ink text-brass">
-                  <Icon name={service.icon} className="h-6 w-6" />
-                </span>
-                <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+                <h2 className="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
                   {service.name}
                 </h2>
                 <p className="mt-4 text-lg text-muted">{service.summary}</p>
