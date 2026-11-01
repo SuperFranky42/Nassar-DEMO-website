@@ -16,6 +16,23 @@ const paths = {
   brush:
     "M18.4 2.6a2 2 0 0 1 3 3L12 15l-3-3zM9 12a3.5 3.5 0 0 0-5 2.5c-.5 2.2-2 3.5-2 3.5s3.5 1.5 6.5-.5A3.5 3.5 0 0 0 9 12z",
   shield: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
+  worker: [
+    "M4.5 16v-2a7.5 7.5 0 0 1 15 0v2",
+    "M2 17.5a1.5 1.5 0 0 1 1.5-1.5h17a1.5 1.5 0 0 1 1.5 1.5v0a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 17.5z",
+    "M10 7v5m4-5v5",
+  ],
+  materials: [
+    "M6 3.5h13.5v5.5H6z",
+    "M3.5 9.25h13.5v5.5H3.5z",
+    "M6 15h13.5v5.5H6z",
+  ],
+  bullseye: [
+    "M1.5 13.2a8.2 8.2 0 1 0 16.4 0 8.2 8.2 0 1 0-16.4 0",
+    "M4.7 13.2a5 5 0 1 0 10 0 5 5 0 1 0-10 0",
+    "M8.1 13.2a1.6 1.6 0 1 0 3.2 0 1.6 1.6 0 1 0-3.2 0",
+    "M9.7 13.2 20.6 2.6",
+    "M20.6 2.6 15 4.4 16.5 9.4z",
+  ],
   wrench:
     "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z",
   expand: "M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7",
@@ -43,7 +60,9 @@ export function Icon({ name, className = "h-5 w-5", filled = false }: IconProps)
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d={paths[name]} />
+      {(Array.isArray(paths[name]) ? paths[name] : [paths[name]]).map((d) => (
+        <path key={d} d={d} />
+      ))}
     </svg>
   );
 }

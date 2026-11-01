@@ -1,4 +1,4 @@
-import { Icon } from "../components/Icon.tsx";
+import { Icon, type IconName } from "../components/Icon.tsx";
 import { PageHero } from "../components/PageHero.tsx";
 import { QuoteBand } from "../components/QuoteBand.tsx";
 import { SectionHeading } from "../components/SectionHeading.tsx";
@@ -8,17 +8,20 @@ import { container } from "../lib/styles.ts";
 import { Reveal } from "../components/Reveal.tsx";
 import { revealDelay } from "../lib/motion.ts";
 
-const promises = [
+const promises: { icon: IconName; title: string; text: string }[] = [
   {
-    title: "You can stay when the scope allows it",
+    icon: "worker",
+    title: "It's the result of skilled professionals",
     text: "We plan dust walls, access, and daily cleanup around the rooms you are still living in.",
   },
   {
-    title: "Decisions are written down",
+    icon: "materials",
+    title: "premium materials, and careful planning.",
     text: "A finish choice, a date, and a price live in the scope so they do not get lost between trades.",
   },
   {
-    title: "A surprise in the walls is a conversation",
+    icon: "bullseye",
+    title: "Built on experience. Driven by excellence.",
     text: "If the structure changes the work, you hear it before the crew changes course.",
   },
 ];
@@ -36,10 +39,9 @@ export function About() {
   return (
     <>
       <PageHero
-        eyebrow="About Nassar"
-        wideTitle
-        title="An experienced team focused on quality, reliability, and"
-        accent="customer satisfaction."
+        title="Your Project,"
+        accent="Our Priority"
+        text="We work closely with every client to deliver results that exceed expectations."
       />
 
       <section id="who-you-will-meet" className="scroll-mt-32 bg-canvas py-20">
@@ -73,7 +75,7 @@ export function About() {
       <section className="pattern-dots py-20 text-white">
         <div className={container}>
           <Reveal>
-            <SectionHeading dark title="Working around a" accent="lived-in house" />
+            <SectionHeading dark title="Quality is never" accent="an accident" />
           </Reveal>
           <ul className="mt-10 grid gap-6 md:grid-cols-3">
             {promises.map((promise, index) => (
@@ -82,7 +84,7 @@ export function About() {
                   delay={revealDelay(index)}
                   className="h-full rounded-2xl border border-white/10 bg-white/5 p-6"
                 >
-                  <Icon name="shield" className="h-7 w-7 text-brass" />
+                  <Icon name={promise.icon} className="h-7 w-7 text-brass" />
                   <h3 className="mt-4 text-xl font-extrabold">{promise.title}</h3>
                   <p className="mt-3 text-sm text-white/70">{promise.text}</p>
                 </Reveal>

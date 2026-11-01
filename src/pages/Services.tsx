@@ -14,9 +14,13 @@ export function Services() {
   return (
     <>
       <PageHero
-        title="Quality is never"
-        accent="an accident"
-        text="From steel structures to premium interior finishes, we deliver quality craftsmanship on every project. Your vision is our priority, and we build with precision, durability, and care."
+        title={
+          <>
+            On <span className="text-brass">Time</span>. On <span className="text-brass">Budget</span>. On{" "}
+            <span className="text-brass">Point</span>
+          </>
+        }
+        text="Your renovation deserves quality, precision, and a team you can trust. We deliver exceptional craftsmanship, complete every project on schedule, and keep your budget in mind—without compromising on quality."
       />
       <nav className="border-b border-line bg-paper" aria-label="Services on this page">
         <Reveal>

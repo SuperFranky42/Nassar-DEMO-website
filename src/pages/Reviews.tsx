@@ -15,7 +15,6 @@ export function Reviews() {
   return (
     <>
       <PageHero
-        eyebrow="Reviews"
         title="What homeowners say after"
         accent="the dust settles."
         text="Sample notes from finished projects. The same themes return: one person to call, a quote that holds, and a house you can live in."

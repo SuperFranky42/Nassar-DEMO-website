@@ -1,10 +1,11 @@
+import type { ReactNode } from "react";
 import banner from "../../assets/home_page_banner.jpg";
 import { container } from "../lib/styles.ts";
 import { Reveal } from "./Reveal.tsx";
 
 type PageHeroProps = {
   eyebrow?: string;
-  title: string;
+  title: ReactNode;
   accent?: string;
   text?: string;
   image?: string;
