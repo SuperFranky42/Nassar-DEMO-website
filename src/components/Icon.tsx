@@ -49,6 +49,9 @@ type IconProps = {
 };
 
 export function Icon({ name, className = "h-5 w-5", filled = false }: IconProps) {
+  const drawing = paths[name];
+  const segments = typeof drawing === "string" ? [drawing] : drawing;
+
   return (
     <svg
       viewBox="0 0 24 24"
@@ -60,7 +63,7 @@ export function Icon({ name, className = "h-5 w-5", filled = false }: IconProps)
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      {(Array.isArray(paths[name]) ? paths[name] : [paths[name]]).map((d) => (
+      {segments.map((d) => (
         <path key={d} d={d} />
       ))}
     </svg>
