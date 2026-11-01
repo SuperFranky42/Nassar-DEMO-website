@@ -22,10 +22,9 @@ export function Work() {
   return (
     <>
       <PageHero
-        eyebrow="Our work"
-        title="Houses we have"
-        accent="finished."
-        text="A sample of kitchens, baths, and whole-home jobs. Open a project for the scope, the timeline, and a before-and-after."
+        title="Details make"
+        accent="the difference"
+        text="From planning to completion, Nassar Construction LLC delivers quality craftsmanship you can trust. Built with precision. Finished with excellence."
       />
       <div className={`${container} pt-12`}>
         <Reveal>
